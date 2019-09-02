@@ -5,26 +5,27 @@ package Lógica;
  * @author Sebastián Moya
  * @date 1/09/19
  */
-public class Interruptor extends Compuertas {
+public class Interruptor {
+    private boolean estado;
 
     /**
      * Método constructor.
      */
-    public Interruptor(){
-        this.salidas = new Lista<>();
-        salidas.add(false);
+    public Interruptor() {
+        this.estado = false;
     }
     /**
      * Método encargado de cambiar el valor de salida del interruptor.
      */
-    @Override
-    public void operar() {
-        if (salidas.buscar(0).equals(true)) {
-            salidas.eliminar(0);
-            salidas.add(false);
-        } else {
-            salidas.eliminar(0);
-            salidas.add(true);
+    public void cambiarEstado(){
+        if(estado){
+            this.estado = false;
+        }else{
+            this.estado = true;
         }
+    }
+
+    public boolean isEstado() {
+        return estado;
     }
 }

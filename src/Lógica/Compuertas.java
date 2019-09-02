@@ -24,6 +24,7 @@ public abstract class Compuertas {
         }else{
             entradas.add(entrada);
             indice ++;
+            if(indice == numeroEntradas){ operar();}
         }
     }
     public abstract void operar();
