@@ -1,18 +1,30 @@
 package Lógica;
 
-public class Interruptor {
-    private boolean estado;
+/**
+ * Clase encargada de dar un valor true o false a una entrada.
+ * @author Sebastián Moya
+ * @date 1/09/19
+ */
+public class Interruptor extends Compuertas {
+
+    /**
+     * Método constructor.
+     */
     public Interruptor(){
-        this.estado = false;
+        this.salidas = new Lista<>();
+        salidas.add(false);
     }
-    public void cambiarEstado(){
-        if(estado){
-            estado = false;
-        }else{
-            estado = true;
+    /**
+     * Método encargado de cambiar el valor de salida del interruptor.
+     */
+    @Override
+    public void operar() {
+        if (salidas.buscar(0).equals(true)) {
+            salidas.eliminar(0);
+            salidas.add(false);
+        } else {
+            salidas.eliminar(0);
+            salidas.add(true);
         }
-    }
-    public void mostrar(){
-        System.out.println(estado);
     }
 }

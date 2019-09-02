@@ -31,4 +31,21 @@ public abstract class Compuertas {
         System.out.println(salidas.buscar(0).getDato());
     }
 
+    /**
+     * Método encargado de eliminar una entrda en específico.
+     * @param numeroEntrada entrada que se desea eliminar
+     */
+    public void eliminarEntrada(int numeroEntrada){
+        entradas.eliminar(numeroEntrada);
+        indice --;
+        salidas = new Lista<>();
+    }
+    public void conexionCompuertas(boolean salida){//Cuando yo selecciono la salida de la compuerta voy a tomar el valor de la salida  lista.buscar(x).getvalor().getsalidas(x)
+
+    }
+    public boolean getSalida(int pos){
+        boolean salida = (boolean)salidas.buscar(pos).getDato();
+        return salida;
+    }
+
 }

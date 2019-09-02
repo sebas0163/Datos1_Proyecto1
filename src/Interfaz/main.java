@@ -4,11 +4,17 @@ import Lógica.*;
 
 public class main {
     public static void main(String[] args) {
-        Lista<Compuertas> lista = new Lista<>();
-        lista.add(new Compuerta_AND());
-        lista.add(new Compuerta_OR());
-        lista.add(new Compuerta_AND());
-        System.out.println(lista.buscar(0).getDato());
-
+        Ejecutar e = new Ejecutar();
+        e.añadirCompuerta(new Interruptor());
+        e.añadirCompuerta(new Compuerta_AND());
+        e.añadirCompuerta(new Compuerta_OR());
+        e.conexiones(0,1);
+        e.conexiones(0,1);
+        e.conexiones(1,2);
+        e.conexiones(1,2);
+        e.probar();
+        Lista p = e.getlista();
+        Compuertas r = (Compuertas)p.buscar(2).getDato();
+        r.mostrar();
     }
 }

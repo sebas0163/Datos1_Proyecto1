@@ -5,6 +5,7 @@ package Lógica;
  * Clase encargada de guardar un conjunto de nodos
  * @param <T> parámetro que define el tipo de dato que guardará la lista
  * @author sebastián Moya
+ * @date 31/08/19
  */
 public class Lista<T> {
     private Nodo head;
@@ -71,6 +72,7 @@ public class Lista<T> {
         }else{
             if(posicion == 0){
                 this.head = this.head.getNext();
+                largo --;
             }else {
                 Nodo prev = this.head;
                 Nodo temp = prev.getNext();
@@ -92,5 +94,8 @@ public class Lista<T> {
      */
     public int getLargo() {
         return largo;
+    }
+    public void getObject(){
+
     }
 }

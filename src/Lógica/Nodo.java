@@ -4,6 +4,7 @@ package Lógica;
  * Clase encargarda de alamcenar los datos asignados y asociarlos o apuntarlos otro obejto de la misma clase.
  * @author sebas
  * @param <T> parámetro que representa el tipo de dato que se va a almacenar.
+ * @date 31/08/19
  */
 public class Nodo<T> {
     private T dato;
@@ -27,7 +28,7 @@ public class Nodo<T> {
      * @return retorna el atributo dato
      */
     public T getDato() {
-        return dato;
+        return this.dato;
     }
 
     /**
