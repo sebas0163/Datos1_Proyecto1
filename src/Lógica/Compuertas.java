@@ -8,6 +8,8 @@ public abstract class Compuertas {
     protected Interruptor interruptor;
     protected Lista<Boolean> salidas;
     protected Lista<Boolean> entradas;
+    protected Lista<Compuertas> observadores;
+    protected Lista<Integer> entradasDependientes;
     protected int indice;
     protected int numeroEntradas;
 
@@ -18,6 +20,25 @@ public abstract class Compuertas {
         this.salidas = new Lista<>();
         this.entradas = new Lista<>();
         this.indice = 0;
+        this.observadores = new Lista<>();
+        this.entradasDependientes = new Lista<>();
+    }
+    public void agregarObservador(Compuertas comp){
+        observadores.add(comp);
+    }
+    protected void notificar(){
+        Nodo temp = observadores.getHead();
+        int index = 0;
+        while(temp != null){
+            Compuertas comp = (Compuertas) temp.getDato();
+            int pos = (int) entradasDependientes.buscar(index).getDato();
+            comp.actualizar(pos,(boolean)salidas.buscar(0).getDato());
+            temp = temp.getNext();
+            index ++;
+        }
+    }
+    public void setEntradasDependientes(int pos){
+        entradasDependientes.add(pos);
     }
 
     /**

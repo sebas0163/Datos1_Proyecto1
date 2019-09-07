@@ -53,7 +53,9 @@ public class Ejecutar {
     public void conexiones(int a,int b){
         Compuertas B = (Compuertas) listaCompuertas.buscar(b).getDato();
         Compuertas A = (Compuertas) listaCompuertas.buscar(a).getDato();
+        A.agregarObservador(B);
         B.setEntradas(A.getSalida(0));// arreglar el operar
+        A.setEntradasDependientes(B.entradas.getLargo()-1);
     }
 
     /**
@@ -82,12 +84,15 @@ public class Ejecutar {
 
     public static void main(String[] args) {
         Ejecutar e = new Ejecutar();
-        e.añadirInterruptor();
+        e.añadirInterruptor();// seguir pruebas 
         e.añadirCompuerta(new Compuerta_AND(2));
+        e.añadirCompuerta(new Compuerta_OR(2));
         e.conectarInterrup(0,0);
         e.conectarInterrup(0,0);
+        e.conexiones(0,1);
+        e.conexiones(0,1);
         e.probar();
-        Compuertas r = (Compuertas)e.listaCompuertas.buscar(0).getDato();
+        Compuertas r = (Compuertas)e.listaCompuertas.buscar(1).getDato();
         r.mostrar();
         Interruptor j = (Interruptor) e.listaInterruptores.buscar(0).getDato();
         j.cambiarEstado();

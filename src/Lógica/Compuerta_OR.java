@@ -30,5 +30,6 @@ public class Compuerta_OR extends Compuertas {
         }else{
             System.out.println("faltan entradas por asignar");
         }
+        notificar();
     }
 }

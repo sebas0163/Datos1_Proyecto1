@@ -30,5 +30,6 @@ public class Compuerta_NAND extends Compuertas {
         }else{
             System.out.println("faltan entradas por asignar");
         }
+        notificar();
     }
 }

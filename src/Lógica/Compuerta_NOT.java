@@ -29,5 +29,6 @@ public class Compuerta_NOT extends Compuertas {
         }else{
             System.out.println("faltan entradas por asignar");
         }
+        notificar();
     }
 }

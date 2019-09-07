@@ -30,5 +30,6 @@ public class Compuerta_NXOR extends Compuertas {
         }else{
             System.out.println("Faltan entradas por asignar");
         }
+        notificar();
     }
 }

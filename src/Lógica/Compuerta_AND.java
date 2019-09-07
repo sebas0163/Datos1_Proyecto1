@@ -30,5 +30,6 @@ public class Compuerta_AND extends Compuertas{
         }else{
             System.out.println("no se puede");
         }
+        notificar();
     }
 }
