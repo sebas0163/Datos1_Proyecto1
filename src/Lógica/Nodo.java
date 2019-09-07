@@ -38,4 +38,7 @@ public class Nodo<T> {
     public void setNext(Nodo<T> next) {
         this.next = next;
     }
+    public void setDato(T dato){
+        this.dato = dato;
+    }
 }

@@ -33,14 +33,16 @@ public class Ejecutar {
     }
 
     /**
-     * Método encargado de establecer la conexión entre compuertas e interruptores.
+     * Método encargado de establecer la conexión entre compuertas e interruptores, también se encarga de agreagar a a la lista de cbservadores las compuerta dependientes de este interruptor.
      * @param a dato de tipo entero que es el número de interruptor a utilizar.
      * @param b dato de tipo entero que indica en que posición de la lista se encuentra la compuerta a utilizar.
      */
     public void conectarInterrup(int a, int b){
         Interruptor select = (Interruptor) listaInterruptores.buscar(a).getDato();
         Compuertas B = (Compuertas) listaCompuertas.buscar(b).getDato();
+        select.agregarObservador(B);
         B.setEntradas(select.isEstado());
+        select.setEntradasDependientes(B.entradas.getLargo() -1);
     }
 
     /**
@@ -76,5 +78,21 @@ public class Ejecutar {
             comp.operar();
             indice ++;
         }
+    }
+
+    public static void main(String[] args) {
+        Ejecutar e = new Ejecutar();
+        e.añadirInterruptor();
+        e.añadirCompuerta(new Compuerta_AND(2));
+        e.conectarInterrup(0,0);
+        e.conectarInterrup(0,0);
+        e.probar();
+        Compuertas r = (Compuertas)e.listaCompuertas.buscar(0).getDato();
+        r.mostrar();
+        Interruptor j = (Interruptor) e.listaInterruptores.buscar(0).getDato();
+        j.cambiarEstado();
+        r.mostrar();
+
+
     }
 }

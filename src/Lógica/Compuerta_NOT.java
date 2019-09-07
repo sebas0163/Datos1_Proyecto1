@@ -21,7 +21,7 @@ public class Compuerta_NOT extends Compuertas {
     @Override
     public void operar() {
         if (indice == numeroEntradas){
-            if(entradas.buscar(0).getDato().equals(true)){
+            if(entradas.verificar(true)){
                 salidas.add(false);
             }else{
                 salidas.add(true);

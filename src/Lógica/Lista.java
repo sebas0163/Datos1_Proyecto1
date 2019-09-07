@@ -11,6 +11,9 @@ public class Lista<T> {
     private Nodo head;
     private int largo;
 
+    /**
+     * Método constructor
+     */
     public Lista() {
         this.head =null;
         this.largo = 0;
@@ -33,7 +36,34 @@ public class Lista<T> {
             largo ++;
         }
     }
+    public void modificarNodo(int pos,T dato){
+        int indice =0;
+        Nodo temp = this.head;
+        while(indice != pos){
+            temp = temp.getNext();
+            indice++;
+        }
+        temp.setDato(dato);
 
+    }
+    /**
+     * Método encargado de verificar si un dato pertenece a la lista.
+     * @param valor dato a verificar.
+     * @return un boolean con el valor de verdad.
+     */
+    public boolean verificar(Object valor){
+        Nodo temp = this.head;
+        boolean estado = false;
+        while (temp != null){
+            if (temp.getDato().equals(valor)){
+                estado = true;
+                break;
+            }else{
+                temp = temp.getNext();
+            }
+        }
+        return estado;
+    }
     /**
      * Método primario que verifica si la posición dada es valida, es decir no es menor a 0 ni mayor al largo de la lista menos 1 .
      * @param posicion recibe un dato de tipo entero que es la posición por la cual se busca.
@@ -49,13 +79,13 @@ public class Lista<T> {
 
     /**
      * Método que busca el nodo en la posición indicada.
-     * @param poisicion Dato de tipo entero, es la posición que se desea buscar
+     * @param posicion Dato de tipo entero, es la posición que se desea buscar
      * @return retorna el nodo en la posición dada.
      */
-    private Nodo buscarAux(int poisicion){
+    private Nodo buscarAux(int posicion){
         int indice =0;
         Nodo temp = this.head;
-        while(indice != poisicion ){
+        while(indice != posicion ){
             temp = temp.getNext();
             indice++;
         }
@@ -63,28 +93,29 @@ public class Lista<T> {
     }
 
     /**
+     * Método encargado de resetear la lista.
+     */
+    public void reset(){
+        this.head = null;
+    }
+
+    /**
      * Método que elimina un nodo en una psoición dada y re direcciona el puntero del nodo anterior a este.
      * @param posicion dato de tipo entero, es la posición del nodo a eliminar.
      */
-    public void eliminar(int posicion){
-        if(posicion > largo-1){
-            System.out.println("posición invalida");
-        }else{
-            if(posicion == 0){
-                this.head = this.head.getNext();
-                largo --;
-            }else {
-                Nodo prev = this.head;
-                Nodo temp = prev.getNext();
-                int indice = 1;
-                while (indice != posicion) {
-                    temp = temp.getNext();
-                    prev = prev.getNext();
-                    indice++;
-                }
-                prev.setNext(temp.getNext());
-                largo--;
+    public void eliminar(int posicion) {
+        if(posicion == 0){
+            this.head = this.head.getNext();
+        }else {
+            Nodo prev = this.head;
+            Nodo temp = prev.getNext();
+            int indice = 1;
+            while (indice != posicion) {
+                temp = temp.getNext();
+                prev = prev.getNext();
+                indice++;
             }
+            prev.setNext(temp.getNext());
         }
     }
 
@@ -95,7 +126,12 @@ public class Lista<T> {
     public int getLargo() {
         return largo;
     }
-    public void getObject(){
 
+    /**
+     * Método encargado de devolver el primer nodo de la lista
+     * @return Atributo head
+     */
+    public Nodo getHead() {
+        return head;
     }
 }

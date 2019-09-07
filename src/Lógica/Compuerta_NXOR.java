@@ -10,10 +10,11 @@ public class Compuerta_NXOR extends Compuertas {
     /**
      * Método constructor
      */
-    public Compuerta_NXOR(){
-        this.numeroEntradas = 2;
+    public Compuerta_NXOR(int cantidadEntradas){
+        this.numeroEntradas = cantidadEntradas;
         this.numeroSalidas = 1;
         this.indice = 0;
+
     }
     /**
      * Calcula el valor de la salida de la compuerta según sus entradas y tabla de verdad.

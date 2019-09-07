@@ -11,10 +11,10 @@ public class Compuerta_OR extends Compuertas {
     /**
      * Método constructor
      */
-    public Compuerta_OR(){
+    public Compuerta_OR(int cantidadEntradas){
         this.numeroSalidas = 1;
         this.indice =0;
-        this.numeroEntradas =2;
+        this.numeroEntradas =cantidadEntradas;
     }
     /**
      * Calcula el valor de la salida de la compuerta según sus entradas y tabla de verdad.
@@ -22,7 +22,7 @@ public class Compuerta_OR extends Compuertas {
     @Override
     public void operar() {
         if(indice == numeroEntradas){
-            if (entradas.buscar(0).getDato().equals(true) || entradas.buscar(1).getDato().equals(true)){
+            if (entradas.verificar(true)){
                 salidas.add(true);
             }else{
                 salidas.add(false);

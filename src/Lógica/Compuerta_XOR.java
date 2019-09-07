@@ -11,10 +11,12 @@ public class Compuerta_XOR extends Compuertas {
     /**
      * Método constructor
      */
-    public Compuerta_XOR(){
-        this.numeroEntradas = 2;
+    public Compuerta_XOR(int cantidadEntradas, Interruptor inter){
+        this.numeroEntradas = cantidadEntradas;
         this.numeroSalidas = 1;
         this.indice = 0;
+        this.interruptor = inter;
+        this.interruptor.agregarObservador(this);
     }
     /**
      * Calcula el valor de la salida de la compuerta según sus entradas y tabla de verdad.

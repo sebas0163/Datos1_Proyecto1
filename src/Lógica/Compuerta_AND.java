@@ -11,9 +11,9 @@ public class Compuerta_AND extends Compuertas{
     /**
      * Método constructor que define los valores de los.
      */
-    public Compuerta_AND(){
+    public Compuerta_AND(int cantidadEntradas){
         this.numeroSalidas = 1;
-        this.numeroEntradas = 2;
+        this.numeroEntradas = cantidadEntradas;
     }
 
     /**
@@ -22,10 +22,10 @@ public class Compuerta_AND extends Compuertas{
     @Override
     public void operar(){
         if(indice == numeroEntradas){
-            if(entradas.buscar(0).getDato().equals(true) & entradas.buscar(1).getDato().equals(true)){
-                salidas.add(true);
-            }else{
+            if(entradas.verificar(false)){
                 salidas.add(false);
+            }else{
+                salidas.add(true);
             }
         }else{
             System.out.println("no se puede");

@@ -11,8 +11,8 @@ public class Compuerta_NAND extends Compuertas {
     /**
      * Método constructor
      */
-    public Compuerta_NAND(){
-        this.numeroEntradas = 2;
+    public Compuerta_NAND(int cantidadEntradas){
+        this.numeroEntradas = cantidadEntradas;
         this.numeroSalidas = 1;
     }
 
@@ -22,7 +22,7 @@ public class Compuerta_NAND extends Compuertas {
     @Override
     public void operar(){
         if(indice == numeroEntradas){
-            if(entradas.buscar(0).getDato().equals(false) || entradas.buscar(1).getDato().equals(false)){
+            if(entradas.verificar(false)){
                 salidas.add(true);
             }else{
                 salidas.add(false);
