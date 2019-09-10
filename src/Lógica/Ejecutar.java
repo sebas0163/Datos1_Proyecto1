@@ -1,11 +1,14 @@
 package Lógica;
 
+import Interfaz.Linea;
+
 /**
  * Clase encargada de manejar la logica de las compuertas que son agragadas al area de trabajo.
  * @author Sebastián Moya.
  * @date 02/09/19
  */
 public class Ejecutar {
+    private Lista<Linea> lineas;
     private Lista<Compuertas> listaCompuertas;
     private Lista<Interruptor> listaInterruptores;
 
@@ -15,6 +18,7 @@ public class Ejecutar {
     public Ejecutar() {
         this.listaCompuertas = new Lista<>();
         this.listaInterruptores = new Lista<>();
+        this.lineas = new Lista<>();
     }
 
     /**
@@ -81,18 +85,30 @@ public class Ejecutar {
             indice ++;
         }
     }
+    public void insertarLinea(Linea l){
+        lineas.add(l);
+    }
+    public Lista getLineas(){
+        return lineas;
+    }
 
     public static void main(String[] args) {
         Ejecutar e = new Ejecutar();
-        e.añadirInterruptor();// seguir pruebas 
+        e.añadirInterruptor();// seguir pruebas
+        e.añadirInterruptor();
+        Interruptor k = (Interruptor) e.listaInterruptores.buscar(1).getDato();
+        k.cambiarEstado();
         e.añadirCompuerta(new Compuerta_AND(2));
         e.añadirCompuerta(new Compuerta_OR(2));
+        e.añadirCompuerta(new Compuerta_NAND(2));
         e.conectarInterrup(0,0);
         e.conectarInterrup(0,0);
         e.conexiones(0,1);
-        e.conexiones(0,1);
+        e.conectarInterrup(1,1);
+        e.conexiones(1,2);
+        e.conectarInterrup(1,2);
         e.probar();
-        Compuertas r = (Compuertas)e.listaCompuertas.buscar(1).getDato();
+        Compuertas r = (Compuertas)e.listaCompuertas.buscar(2).getDato();
         r.mostrar();
         Interruptor j = (Interruptor) e.listaInterruptores.buscar(0).getDato();
         j.cambiarEstado();
