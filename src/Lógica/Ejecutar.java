@@ -11,6 +11,7 @@ public class Ejecutar {
     private Lista<Linea> lineas;
     private Lista<Compuertas> listaCompuertas;
     private Lista<Interruptor> listaInterruptores;
+    private int numeroCompuertas;
 
     /**
      * Método constructor de la clase
@@ -19,6 +20,7 @@ public class Ejecutar {
         this.listaCompuertas = new Lista<>();
         this.listaInterruptores = new Lista<>();
         this.lineas = new Lista<>();
+        this.numeroCompuertas = 0;
     }
 
     /**
@@ -34,6 +36,7 @@ public class Ejecutar {
      */
     public void añadirCompuerta(Compuertas comp){
         listaCompuertas.add(comp);
+        numeroCompuertas ++;
     }
 
     /**
@@ -90,6 +93,9 @@ public class Ejecutar {
     }
     public Lista getLineas(){
         return lineas;
+    }
+    public int getNuemeroCompuertas(){
+        return numeroCompuertas;
     }
 
     public static void main(String[] args) {

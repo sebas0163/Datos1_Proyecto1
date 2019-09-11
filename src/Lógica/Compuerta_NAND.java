@@ -1,5 +1,7 @@
 package Lógica;
 
+import javafx.scene.image.Image;
+
 /**
  * Clase encargada del funcionamiento de la compuerta lógica NAND.
  * @author Sebastián Moya.
@@ -14,6 +16,9 @@ public class Compuerta_NAND extends Compuertas {
     public Compuerta_NAND(int cantidadEntradas){
         this.numeroEntradas = cantidadEntradas;
         this.numeroSalidas = 1;
+        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta Nand.png"));
+        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta Nand2.png"));
+        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta Nand3.png"));
     }
 
     /**

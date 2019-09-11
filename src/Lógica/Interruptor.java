@@ -1,5 +1,8 @@
 package Lógica;
 
+import javafx.scene.image.Image;
+
+import java.awt.*;
 /**
  * Clase encargada de dar un valor true o false a una entrada.
  * @author Sebastián Moya
@@ -9,6 +12,7 @@ public class Interruptor {
     private Lista<Compuertas> observadores;
     private Lista<Integer> entradasDependientes;//Guarda la posción de la entrada que depende de la salida del interruptor
     private boolean estado;
+    private Image[] imagenes;
 
     /**
      * Método constructor.

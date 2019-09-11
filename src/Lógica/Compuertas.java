@@ -1,5 +1,7 @@
 package Lógica;
 
+import javafx.scene.image.Image;
+
 /**
  * Superclase encargada de definir los métodos y atributos que heredarán las clases hijas.
  * @author Sebastián Moya
@@ -11,6 +13,7 @@ public abstract class Compuertas {
     protected Lista<Compuertas> observadores;
     protected Lista<Integer> entradasDependientes;
     protected int indice;
+    protected Lista<Image> imagenes;
     protected int numeroEntradas;
 
     /**
@@ -22,6 +25,7 @@ public abstract class Compuertas {
         this.indice = 0;
         this.observadores = new Lista<>();
         this.entradasDependientes = new Lista<>();
+        this.imagenes = new Lista<>();
     }
     public void agregarObservador(Compuertas comp){
         observadores.add(comp);
@@ -93,5 +97,14 @@ public abstract class Compuertas {
         boolean salida = (boolean)salidas.buscar(pos).getDato();
         return salida;
     }
+
+    /**
+     * Método que devuelve la lista de imágenes
+     * @return lista de imágenes
+     */
+    public Lista getImagenes(){
+        return this.imagenes;
+    }
+
 
 }

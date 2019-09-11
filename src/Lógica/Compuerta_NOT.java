@@ -1,5 +1,7 @@
 package Lógica;
 
+import javafx.scene.image.Image;
+
 /**
  * Clase encargada del funcionamiento de la compuerta lógica NOT.
  * @author Sebastián Moya.
@@ -14,6 +16,8 @@ public class Compuerta_NOT extends Compuertas {
     public Compuerta_NOT(){
         this.indice =0;
         this.numeroEntradas =1;
+        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta not.png"));
+
     }
     /**
      * Calcula el valor de la salida de la compuerta según sus entradas y tabla de verdad.

@@ -1,5 +1,7 @@
 package Lógica;
 
+import javafx.scene.image.Image;
+
 /**
  * Clase encargada del funcionamiento de la compuerta lógica XOR.
  * @author Sebastián Moya.
@@ -15,8 +17,9 @@ public class Compuerta_XOR extends Compuertas {
         this.numeroEntradas = cantidadEntradas;
         this.numeroSalidas = 1;
         this.indice = 0;
-        this.interruptor = inter;
-        this.interruptor.agregarObservador(this);
+        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta XOr.png"));
+        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta XOr2.png"));
+        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta XOr3.png"));
     }
     /**
      * Calcula el valor de la salida de la compuerta según sus entradas y tabla de verdad.

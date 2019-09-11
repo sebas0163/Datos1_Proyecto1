@@ -1,5 +1,7 @@
 package Lógica;
 
+import javafx.scene.image.Image;
+
 /**
  * Clase encargada del funcionamiento de la compuerta lógica NXOR.
  * @author Sebastián Moya.
@@ -14,6 +16,9 @@ public class Compuerta_NXOR extends Compuertas {
         this.numeroEntradas = cantidadEntradas;
         this.numeroSalidas = 1;
         this.indice = 0;
+        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta NXOR.png"));
+        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta NXOR2.png"));
+        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta NXOR3.png"));
 
     }
     /**
@@ -22,10 +27,10 @@ public class Compuerta_NXOR extends Compuertas {
     @Override
     public void operar() {
         if (indice == numeroEntradas){
-            if (entradas.buscar(0).getDato().equals(true) ^ entradas.buscar(1).getDato().equals(true)){
-                salidas.add(false);
-            }else{
+            if (entradas.verificar(false) ^ entradas.verificar(true)){
                 salidas.add(true);
+            }else{
+                salidas.add(false);
             }
         }else{
             System.out.println("Faltan entradas por asignar");

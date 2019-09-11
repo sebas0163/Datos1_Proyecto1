@@ -6,20 +6,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
 public class Controller {
+
+
+
     @FXML
     private Canvas canv;
-    private Ejecutar ejecución = new Ejecutar();
+    public static GraphicsContext context;
+    public static Ejecutar ejecución = new Ejecutar();
     private int numeroLineas =0;
-
-
     @FXML
     private ImageView comp1;
     @FXML
@@ -30,6 +30,10 @@ public class Controller {
         linea.setInicioY(event.getY());
         ejecución.insertarLinea(linea);
     }
+    public void initialize(){
+        context = canv.getGraphicsContext2D();
+    }
+
     @FXML
     public void prueba2(MouseEvent event){
         Linea temp = (Linea) ejecución.getLineas().buscar(numeroLineas).getDato();
@@ -39,7 +43,7 @@ public class Controller {
     }
 
     @FXML
-    private void pressAND(MouseEvent event){
+    private void pressAND(MouseEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("emergente.fxml"));
@@ -47,9 +51,8 @@ public class Controller {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
-
 }

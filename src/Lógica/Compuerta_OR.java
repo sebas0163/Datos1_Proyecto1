@@ -1,5 +1,7 @@
 package Lógica;
 
+import javafx.scene.image.Image;
+
 /**
  * Clase encargada del funcionamiento de la compuerta lógica OR.
  * @author Sebastián Moya.
@@ -15,6 +17,9 @@ public class Compuerta_OR extends Compuertas {
         this.numeroSalidas = 1;
         this.indice =0;
         this.numeroEntradas =cantidadEntradas;
+        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta or.png"));
+        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta or2.png"));
+        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta or3.png"));
     }
     /**
      * Calcula el valor de la salida de la compuerta según sus entradas y tabla de verdad.
