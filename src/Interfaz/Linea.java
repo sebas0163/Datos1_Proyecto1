@@ -1,7 +1,13 @@
 package Interfaz;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
+/**
+ * Clase encargada de crear las lineas que se dibujan  en el canvas.
+ * @author Sebastián Moya Monge
+ * @date 11/09/19
+ */
 public class Linea {
     private double inicioX;
     private double inicioY;
@@ -18,6 +24,8 @@ public class Linea {
         this.gc = context;
     }
     private void dibujar(){
+        gc.setStroke(new Color(Math.random(),Math.random(),Math.random(),1));
+        gc.setLineWidth(3.0);
         gc.strokeLine(inicioX,inicioY,finX,finY);
     }
     public void setInicioX(double inicioX) {

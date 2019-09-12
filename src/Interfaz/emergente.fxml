@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="273.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.controller2">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="214.0" prefWidth="298.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.controller2">
    <children>
       <Label layoutX="22.0" layoutY="14.0" prefHeight="33.0" prefWidth="227.0" text="Seleccione el numero de entradas." />
       <RadioButton fx:id="seleccion1" layoutX="80.0" layoutY="48.0" mnemonicParsing="false" text="Dos entradas" />
       <RadioButton fx:id="seleccion2" layoutX="80.0" layoutY="78.0" mnemonicParsing="false" text="Tres entradas" />
       <RadioButton fx:id="seleccion3" layoutX="80.0" layoutY="108.0" mnemonicParsing="false" text="Cuatro entradas" />
-      <RadioButton fx:id="seleccion4" layoutX="80.0" layoutY="138.0" mnemonicParsing="false" text="Sin seleccionar" />
+      <Button fx:id="bton" layoutX="122.0" layoutY="152.0" mnemonicParsing="false" onAction="#accionar" text="OK" />
    </children>
 </AnchorPane>

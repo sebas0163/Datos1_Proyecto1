@@ -11,11 +11,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="990.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.Controller">
    <children>
-      <SplitPane dividerPositions="0.9072096128170895" prefHeight="990.0" prefWidth="1500.0">
+      <SplitPane dividerPositions="0.8931909212283045" prefHeight="990.0" prefWidth="1500.0">
         <items>
           <AnchorPane fx:id="poscanv" minHeight="0.0" minWidth="0.0" prefHeight="989.0" prefWidth="1282.0" style="-fx-background-color: #e0e0dc;">
                <children>
-                  <Canvas fx:id="canv" height="982.0" layoutY="7.0" onMousePressed="#prueba" onMouseReleased="#prueba2" width="1356.0" />
+                  <Canvas fx:id="canv" height="982.0" layoutX="-14.0" layoutY="3.0" onMousePressed="#clickCanvas" onMouseReleased="#clickCanvas2" width="1356.0" />
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="385.0" prefWidth="519.0">
                <children>
@@ -23,16 +23,16 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="327.0" prefWidth="222.0">
                            <children>
-                              <VBox layoutY="-3.0" prefHeight="827.0" prefWidth="136.0" style="-fx-background-color: #0f273b;">
+                              <VBox layoutY="-3.0" prefHeight="827.0" prefWidth="158.0" style="-fx-background-color: #0f273b;">
                                  <children>
-                                    <ImageView fx:id="comp1" fitHeight="46.0" fitWidth="83.0" onMouseClicked="#pressAND" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="comp1" fitHeight="65.0" fitWidth="110.0" onMouseClicked="#pressAND" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@Imagenes/Compuerta And.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets left="25.0" top="10.0" />
                                        </VBox.margin></ImageView>
-                                    <ImageView fx:id="comp2" fitHeight="46.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="comp2" fitHeight="65.0" fitWidth="110.0" onMouseClicked="#pressNAND" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@Imagenes/Compuerta Nand.png" />
                                        </image>
@@ -40,7 +40,7 @@
                                           <Insets left="25.0" top="10.0" />
                                        </VBox.margin>
                                     </ImageView>
-                                    <ImageView fx:id="comp3" fitHeight="46.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="comp3" fitHeight="65.0" fitWidth="110.0" onMouseClicked="#pressOR" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@Imagenes/COMPUERTA or.png" />
                                        </image>
@@ -48,7 +48,7 @@
                                           <Insets left="25.0" top="10.0" />
                                        </VBox.margin>
                                     </ImageView>
-                                    <ImageView fx:id="comp4" fitHeight="46.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="comp4" fitHeight="65.0" fitWidth="110.0" onMouseClicked="#pressNOR" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@Imagenes/Compuerta Nor.png" />
                                        </image>
@@ -56,7 +56,7 @@
                                           <Insets left="25.0" top="10.0" />
                                        </VBox.margin>
                                     </ImageView>
-                                    <ImageView fx:id="comp5" fitHeight="46.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="comp5" fitHeight="65.0" fitWidth="110.0" onMouseClicked="#pressNOT" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@Imagenes/Compuerta not.png" />
                                        </image>
@@ -64,7 +64,7 @@
                                           <Insets left="25.0" top="10.0" />
                                        </VBox.margin>
                                     </ImageView>
-                                    <ImageView fx:id="comp6" fitHeight="46.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="comp6" fitHeight="65.0" fitWidth="110.0" onMouseClicked="#pressXOR" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@Imagenes/compuerta XOr.png" />
                                        </image>
@@ -72,9 +72,17 @@
                                           <Insets left="25.0" top="10.0" />
                                        </VBox.margin>
                                     </ImageView>
-                                    <ImageView fx:id="comp7" fitHeight="46.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="comp7" fitHeight="65.0" fitWidth="110.0" onMouseClicked="#pressNXOR" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@Imagenes/compuerta NXOr.png" />
+                                       </image>
+                                       <VBox.margin>
+                                          <Insets left="25.0" top="10.0" />
+                                       </VBox.margin>
+                                    </ImageView>
+                                    <ImageView fx:id="interruptor" fitHeight="65.0" fitWidth="110.0" onMouseClicked="#pressinterruptor" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Imagenes/Interruptor2.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets left="25.0" top="10.0" />
@@ -86,8 +94,9 @@
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #0f273b;">
                            <children>
-                              <Button layoutX="32.0" layoutY="14.0" mnemonicParsing="false" text="Actualizar" />
-                              <Button layoutX="31.0" layoutY="69.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="68.0" text="Guardar" />
+                              <Button layoutX="32.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Actualizar" />
+                              <Button layoutX="31.0" layoutY="69.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Guardar" />
+                              <Button layoutX="29.0" layoutY="112.0" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="94.0" text="Limpiar" />
                            </children></AnchorPane>
                     </items>
                   </SplitPane>

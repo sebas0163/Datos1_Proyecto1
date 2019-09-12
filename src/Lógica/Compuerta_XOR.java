@@ -13,7 +13,7 @@ public class Compuerta_XOR extends Compuertas {
     /**
      * Método constructor
      */
-    public Compuerta_XOR(int cantidadEntradas, Interruptor inter){
+    public Compuerta_XOR(int cantidadEntradas){
         this.numeroEntradas = cantidadEntradas;
         this.numeroSalidas = 1;
         this.indice = 0;
