@@ -16,9 +16,13 @@ public class Compuerta_NXOR extends Compuertas {
         this.numeroEntradas = cantidadEntradas;
         this.numeroSalidas = 1;
         this.indice = 0;
-        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta NXOR.png"));
-        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta NXOR2.png"));
-        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta NXOR3.png"));
+        try {
+            this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta NXOR.png"));
+            this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta NXOR2.png"));
+            this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta NXOR3.png"));
+        }catch (Exception e) {
+            System.out.println("error al cargar imagenes");
+        }
 
     }
     /**

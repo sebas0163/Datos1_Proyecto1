@@ -27,9 +27,18 @@ public abstract class Compuertas {
         this.entradasDependientes = new Lista<>();
         this.imagenes = new Lista<>();
     }
+
+    /**
+     * Método encargado de añadir a la lista de observadores los obajetos que necesitan ser actualizados cuando la compuerta cambie.
+     * @param comp compuerta que está atenta de algún cambio en la salida del sujeto.
+     */
     public void agregarObservador(Compuertas comp){
         observadores.add(comp);
     }
+
+    /**
+     * Método encargado de notificar a los observadores del cambio en la compuerta.
+     */
     protected void notificar(){
         Nodo temp = observadores.getHead();
         int index = 0;
@@ -41,6 +50,11 @@ public abstract class Compuertas {
             index ++;
         }
     }
+
+    /**
+     * Método que incerta la cantidad de entradas dependientes de una salida.
+     * @param pos numero de entradas dependientes.
+     */
     public void setEntradasDependientes(int pos){
         entradasDependientes.add(pos);
     }

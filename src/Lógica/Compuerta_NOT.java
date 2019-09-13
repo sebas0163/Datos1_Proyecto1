@@ -16,7 +16,11 @@ public class Compuerta_NOT extends Compuertas {
     public Compuerta_NOT(){
         this.indice =0;
         this.numeroEntradas =1;
-        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta not.png"));
+        try{
+            this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta not.png"));
+        }catch (Exception e) {
+            System.out.println("error al cargar imagenes");
+        }
 
     }
     /**

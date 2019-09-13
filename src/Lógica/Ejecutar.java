@@ -88,12 +88,27 @@ public class Ejecutar {
             indice ++;
         }
     }
+
+    /**
+     * Método encargado de añadir una linea a la lista de lineas.
+     * @param l dato de tipo linea, que contiene a la linea dibujada.
+     */
     public void insertarLinea(Linea l){
         lineas.add(l);
     }
+
+    /**
+     * Método que devuleve la lista con las lineas dibujadas.
+     * @return lineas dibujadas.
+     */
     public Lista getLineas(){
         return lineas;
     }
+
+    /**
+     * Método que devuelve la cantidad de compuertas que hay en uso.
+     * @return dato de tipo entero hace referencia al atributo numeroCompuertas.
+     */
     public int getNuemeroCompuertas(){
         return numeroCompuertas;
     }
@@ -105,8 +120,8 @@ public class Ejecutar {
         Interruptor k = (Interruptor) e.listaInterruptores.buscar(1).getDato();
         k.cambiarEstado();
         e.añadirCompuerta(new Compuerta_AND(2));
-        e.añadirCompuerta(new Compuerta_OR(2));
-        e.añadirCompuerta(new Compuerta_NAND(2));
+        e.añadirCompuerta(new Compuerta_AND(2));
+        e.añadirCompuerta(new Compuerta_AND(2));
         e.conectarInterrup(0,0);
         e.conectarInterrup(0,0);
         e.conexiones(0,1);
@@ -117,6 +132,8 @@ public class Ejecutar {
         Compuertas r = (Compuertas)e.listaCompuertas.buscar(2).getDato();
         r.mostrar();
         Interruptor j = (Interruptor) e.listaInterruptores.buscar(0).getDato();
+        j.cambiarEstado();
+        r.mostrar();
         j.cambiarEstado();
         r.mostrar();
 

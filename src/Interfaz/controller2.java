@@ -7,10 +7,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import static Interfaz.Controller.*;
 
+/**
+ * Clase encargada de controlar los eventos de la ventana emergente
+ * @author Sebastián Moya
+ * @date 10/09/19
+ */
 public class controller2 {
     @FXML
     private RadioButton seleccion1;
@@ -24,7 +31,9 @@ public class controller2 {
     private Ejecutar ejecutar;
     public static int compuerta = 0;
 
-
+    /**
+     * Método encargado de inicializar las caracteristicas de la ventana
+     */
     public void initialize() {
         ToggleGroup group = new ToggleGroup();
         seleccion1.setToggleGroup(group);
@@ -33,6 +42,10 @@ public class controller2 {
         gc = context;
         ejecutar = ejecución;
     }
+
+    /**
+     * Método que permite seleccionar el numero de entradas de la compuerta a elegir.
+     */
     @FXML
     private void accionar(){
         if (seleccion1.isSelected()){
@@ -49,6 +62,11 @@ public class controller2 {
             stage.close();
         }
     }
+
+    /**
+     * Método encargado de dibujar la compuerta solicitada con su respectivo número de entradas
+     * @param num dato de tipo entero que referencia al número de entradas solicitadas.
+     */
     private void  dibujarImagen(int num){
         Compuertas comp;
         Image im;
@@ -58,6 +76,10 @@ public class controller2 {
                     ejecutar.añadirCompuerta(new Compuerta_AND(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
+                    /*Circle circulo = new Circle(83.5);
+                    circulo.setCenterX((int) (Math.random()*1200));
+                    circulo.setCenterY((int)(Math.random()*600));
+                    circulo.setFill(new ImagePattern(im));*/
                     gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
                     System.out.println(im);
                 } else if (num == 3) {

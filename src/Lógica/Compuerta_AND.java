@@ -16,9 +16,13 @@ public class Compuerta_AND extends Compuertas{
     public Compuerta_AND(int cantidadEntradas){
         this.numeroSalidas = 1;
         this.numeroEntradas = cantidadEntradas;
-        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta And.png"));
-        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta And2.png"));
-        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta And3.png"));
+        try {
+            this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta And.png"));
+            this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta And2.png"));
+            this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta And3.png"));
+        }catch (Exception e) {
+            System.out.println("error al cargar imagenes");
+        }
     }
     /**
      * Calcula el valor de la salida de la compuerta según sus entradas

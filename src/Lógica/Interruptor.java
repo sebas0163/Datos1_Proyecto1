@@ -24,8 +24,12 @@ public class Interruptor {
         this.observadores = new Lista<>();
         this.entradasDependientes = new Lista<>();
         this.imagenes = new Lista<>();
-        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Interruptor1.png"));
-        this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Interruptor2.png"));
+        try {
+            this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Interruptor1.png"));
+            this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Interruptor2.png"));
+        }catch (Exception e) {
+            System.out.println("error al cargar imagenes");
+        }
     }
     public void setEntradasDependientes(int pos){
         entradasDependientes.add(pos);
@@ -56,10 +60,18 @@ public class Interruptor {
             notificar();
         }
     }
-
+    /**
+     * Método que da a conocer el estado del interruptor
+     * @return booleano.
+     */
     public boolean isEstado() {
         return estado;
     }
+
+    /**
+     * Método que devuelve la lista con las imágenes del interruptor.
+     * @return atributo imágenes.
+     */
     public Lista<Image> getImage(){
         return imagenes;
     }
