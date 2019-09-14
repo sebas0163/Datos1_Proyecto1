@@ -4,14 +4,18 @@ import Lógica.Compuerta_NOT;
 import Lógica.Compuertas;
 import Lógica.Ejecutar;
 import Lógica.Interruptor;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import static Interfaz.controller2.compuerta;
@@ -24,11 +28,48 @@ import static Interfaz.controller2.compuerta;
 public class Controller {
     @FXML
     private Canvas canv;
+    @FXML
+    private Pane pane;
+    public static Pane pane1;
     public static GraphicsContext context;
     public static Ejecutar ejecución = new Ejecutar();
     private int numeroLineas =0;
+    private double orgSceneX;
+    private double orgSceneY;
+    private double orgTranslateX;
+    private double orgTranslateY;
     @FXML
     private ImageView comp1;
+
+    EventHandler<MouseEvent> LabelOnMousePressedEventHandler = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent t) {
+            if(t.getButton().equals(MouseButton.SECONDARY)){
+                System.out.println("hola");
+            }else{
+            System.out.println(t.getButton());
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            orgTranslateX = ((Label)(t.getSource())).getTranslateX();
+            orgTranslateY = ((Label)(t.getSource())).getTranslateY();
+            }
+        }
+    };
+    EventHandler<MouseEvent> LabelOnMouseDraggedEventHandler = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent t) {
+            if(t.getButton().equals(MouseButton.SECONDARY)){
+                System.out.println("adios");
+            }else {
+                double offsetX = t.getSceneX() - orgSceneX;
+                double offsetY = t.getSceneY() - orgSceneY;
+                double newTranslateX = orgTranslateX + offsetX;
+                double newTranslateY = orgTranslateY + offsetY;
+                ((Label) (t.getSource())).setTranslateX(newTranslateX);
+                ((Label) (t.getSource())).setTranslateY(newTranslateY);
+            }
+        }
+    };
 
     /**
      * Método que detecta si se está haciendo click en el canvas y envia las posiciones iniciales para dibujar una linea.
@@ -48,6 +89,7 @@ public class Controller {
     public void initialize(){
         context = canv.getGraphicsContext2D();
         canv.setFocusTraversable(true);
+        pane1 = pane;
     }
 
     /**
@@ -177,7 +219,12 @@ public class Controller {
     private void pressNOT(MouseEvent event){
         ejecución.añadirCompuerta(new Compuerta_NOT());
         Compuertas comp = (Compuertas) ejecución.getlista().buscar(ejecución.getNuemeroCompuertas()-1).getDato();
-        context.drawImage((Image) comp.getImagenes().buscar(0).getDato(),400,300);
+        Image im = (Image)comp.getImagenes().buscar(0).getDato();
+        Label label = new Label();
+        label.setGraphic(new ImageView(im));
+        label.setOnMousePressed(LabelOnMousePressedEventHandler);
+        label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+        pane1.getChildren().add(label);
     }
     /**
      * Método que detecta si se seleccionó un interruptor en la paleta y procede a dibujarlo en el canvas.
@@ -187,7 +234,12 @@ public class Controller {
     private void pressinterruptor(MouseEvent event){
         ejecución.añadirInterruptor();
         Interruptor interr = (Interruptor)ejecución.getInter().buscar(ejecución.getInter().getLargo()-1).getDato();
-        context.drawImage((Image) interr.getImage().buscar(1).getDato(),(int) (Math.random()*300), (int)(Math.random()*600),90,70);
+        Image im = (Image) interr.getImage().buscar(1).getDato();
+        Label label = new Label();
+        label.setGraphic(new ImageView(im));
+        label.setOnMousePressed(LabelOnMousePressedEventHandler);
+        label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+        pane1.getChildren().add(label);
     }
 
     /**
@@ -198,5 +250,6 @@ public class Controller {
         context.clearRect(0,0,1500,990);
         ejecución = new Ejecutar();
         numeroLineas = 0;
+        pane.getChildren().clear();
     }
 }

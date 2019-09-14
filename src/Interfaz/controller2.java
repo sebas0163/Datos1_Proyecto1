@@ -1,12 +1,17 @@
 package Interfaz;
 
 import Lógica.*;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -30,6 +35,10 @@ public class controller2 {
     private GraphicsContext gc;
     private Ejecutar ejecutar;
     public static int compuerta = 0;
+    private double orgSceneX;
+    private double orgSceneY;
+    private double orgTranslateX;
+    private double orgTranslateY;
 
     /**
      * Método encargado de inicializar las caracteristicas de la ventana
@@ -42,6 +51,26 @@ public class controller2 {
         gc = context;
         ejecutar = ejecución;
     }
+    EventHandler<MouseEvent> LabelOnMousePressedEventHandler = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent t) {
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            orgTranslateX = ((Label)(t.getSource())).getTranslateX();
+            orgTranslateY = ((Label)(t.getSource())).getTranslateY();
+        }
+    };
+    EventHandler<MouseEvent> LabelOnMouseDraggedEventHandler = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent t) {
+            double offsetX = t.getSceneX() - orgSceneX;
+            double offsetY = t.getSceneY() - orgSceneY;
+            double newTranslateX = orgTranslateX + offsetX;
+            double newTranslateY = orgTranslateY + offsetY;
+            ((Label)(t.getSource())).setTranslateX(newTranslateX);
+            ((Label)(t.getSource())).setTranslateY(newTranslateY);
+        }
+    };
 
     /**
      * Método que permite seleccionar el numero de entradas de la compuerta a elegir.
@@ -76,22 +105,30 @@ public class controller2 {
                     ejecutar.añadirCompuerta(new Compuerta_AND(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
-                    /*Circle circulo = new Circle(83.5);
-                    circulo.setCenterX((int) (Math.random()*1200));
-                    circulo.setCenterY((int)(Math.random()*600));
-                    circulo.setFill(new ImagePattern(im));*/
-                    gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                     System.out.println(im);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_AND(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
-                    gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_AND(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
-                    gc.drawImage(im, (int) (Math.random()*1200), (int)(Math.random()*600));
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 }
                 break;
             case 2:
@@ -99,18 +136,29 @@ public class controller2 {
                     ejecutar.añadirCompuerta(new Compuerta_OR(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
-                    gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
-                    System.out.println(im);
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_OR(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
-                    gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_OR(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
-                    gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 }
                 break;
             case 3:
@@ -118,18 +166,29 @@ public class controller2 {
                     ejecutar.añadirCompuerta(new Compuerta_NAND(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
-                    gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
-                    System.out.println(im);
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_NAND(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
-                    gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_NAND(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
-                    gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 }
                 break;
             case 4:
@@ -137,18 +196,29 @@ public class controller2 {
                     ejecutar.añadirCompuerta(new Compuerta_NOR(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
-                    gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
-                    System.out.println(im);
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_NOR(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
-                    gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_NOR(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
-                    gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 }
                 break;
             case 5:
@@ -156,18 +226,29 @@ public class controller2 {
                     ejecutar.añadirCompuerta(new Compuerta_XOR(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
-                    gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
-                    System.out.println(im);
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_XOR(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
-                    gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_XOR(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
-                    gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 }
                 break;
             case 6:
@@ -175,18 +256,29 @@ public class controller2 {
                     ejecutar.añadirCompuerta(new Compuerta_NXOR(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
-                    gc.drawImage(im,(int) (Math.random())*1200, (int)(Math.random()*600));
-                    System.out.println(im);
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_NXOR(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
-                    gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_NXOR(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
-                    gc.drawImage(im,(int) (Math.random()*1200), (int)(Math.random()*600));
+                    Label label = new Label();
+                    label.setGraphic(new ImageView(im));
+                    label.setOnMousePressed(LabelOnMousePressedEventHandler);
+                    label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+                    pane1.getChildren().add(label);
                 }
                 break;
         }
