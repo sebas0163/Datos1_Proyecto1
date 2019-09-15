@@ -64,6 +64,19 @@ public class Lista<T> {
         }
         return estado;
     }
+    public int getPos(Object valor){
+        Nodo temp = this.head;
+        int indice = 0;
+        while (temp != null){
+            if (temp.getDato().equals(valor)){
+                break;
+            }else{
+                temp = temp.getNext();
+                indice ++;
+            }
+        }
+        return indice;
+    }
     /**
      * Método primario que verifica si la posición dada es valida, es decir no es menor a 0 ni mayor al largo de la lista menos 1 .
      * @param posicion recibe un dato de tipo entero que es la posición por la cual se busca.

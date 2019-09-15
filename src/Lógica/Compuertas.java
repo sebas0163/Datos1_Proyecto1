@@ -15,6 +15,8 @@ public abstract class Compuertas {
     protected int indice;
     protected Lista<Image> imagenes;
     protected int numeroEntradas;
+    protected double posX;
+    protected double posY;
 
     /**
      * Método constructor, que define el valor de los atributos.
@@ -110,6 +112,22 @@ public abstract class Compuertas {
     public boolean getSalida(int pos){
         boolean salida = (boolean)salidas.buscar(pos).getDato();
         return salida;
+    }
+
+    public double getPosX() {
+        return posX;
+    }
+
+    public void setPosX(double posX) {
+        this.posX = posX;
+    }
+
+    public double getPosY() {
+        return posY;
+    }
+
+    public void setPosY(double posY) {
+        this.posY = posY;
     }
 
     /**

@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 import static Interfaz.controller2.compuerta;
@@ -27,13 +28,9 @@ import static Interfaz.controller2.compuerta;
  */
 public class Controller {
     @FXML
-    private Canvas canv;
-    @FXML
     private Pane pane;
     public static Pane pane1;
-    public static GraphicsContext context;
     public static Ejecutar ejecución = new Ejecutar();
-    private int numeroLineas =0;
     private double orgSceneX;
     private double orgSceneY;
     private double orgTranslateX;
@@ -45,9 +42,7 @@ public class Controller {
         @Override
         public void handle(MouseEvent t) {
             if(t.getButton().equals(MouseButton.SECONDARY)){
-                System.out.println("hola");
             }else{
-            System.out.println(t.getButton());
             orgSceneX = t.getSceneX();
             orgSceneY = t.getSceneY();
             orgTranslateX = ((Label)(t.getSource())).getTranslateX();
@@ -59,7 +54,6 @@ public class Controller {
         @Override
         public void handle(MouseEvent t) {
             if(t.getButton().equals(MouseButton.SECONDARY)){
-                System.out.println("adios");
             }else {
                 double offsetX = t.getSceneX() - orgSceneX;
                 double offsetY = t.getSceneY() - orgSceneY;
@@ -70,26 +64,23 @@ public class Controller {
             }
         }
     };
+    /**
+     * Método encargado de iniciar las caracteristicas de la interfaz.
+     */
+    public void initialize(){
+        this.pane1 = pane;
+    }
 
     /**
      * Método que detecta si se está haciendo click en el canvas y envia las posiciones iniciales para dibujar una linea.
      * @param event
      */
     @FXML
-    private void clickCanvas(MouseEvent event){
-        Linea linea = new Linea(context);
-        linea.setInicioX(event.getX());
-        linea.setInicioY(event.getY());
-        ejecución.insertarLinea(linea);
-    }
-
-    /**
-     * Método encargado de iniciar las caracteristicas de la interfaz.
-     */
-    public void initialize(){
-        context = canv.getGraphicsContext2D();
-        canv.setFocusTraversable(true);
-        pane1 = pane;
+    private void clickPane(MouseEvent event){
+        /*Linea l = new Linea();
+        l.setInicioX(event.getX());
+        l.setInicioY(event.getY());
+        ejecución.insertarLinea(l);*/
     }
 
     /**
@@ -97,11 +88,10 @@ public class Controller {
      * @param event
      */
     @FXML
-    public void clickCanvas2(MouseEvent event){
-        Linea temp = (Linea) ejecución.getLineas().buscar(numeroLineas).getDato();
+    public void relasePane(MouseEvent event){
+        /*Linea temp = (Linea) ejecución.getLineas().buscar(ejecución.getLineas().getLargo()-1).getDato();
         temp.setFinX(event.getX());
-        temp.setFinY(event.getY());
-        numeroLineas ++;
+        temp.setFinY(event.getY());*/
     }
     /**
      * Método que detecta si se seleccionó la compuerta And en la paleta y procede a abrir una ventana de de selección.
@@ -247,9 +237,7 @@ public class Controller {
      */
     @FXML
     private void reset(){
-        context.clearRect(0,0,1500,990);
         ejecución = new Ejecutar();
-        numeroLineas = 0;
         pane.getChildren().clear();
     }
 }

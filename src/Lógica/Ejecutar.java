@@ -2,6 +2,8 @@ package Lógica;
 
 import Interfaz.Linea;
 
+import javax.swing.text.html.ImageView;
+
 /**
  * Clase encargada de manejar la logica de las compuertas que son agragadas al area de trabajo.
  * @author Sebastián Moya.
@@ -11,6 +13,7 @@ public class Ejecutar {
     private Lista<Linea> lineas;
     private Lista<Compuertas> listaCompuertas;
     private Lista<Interruptor> listaInterruptores;
+    private Lista<ImageView> listaImageView;
     private int numeroCompuertas;
 
     /**
@@ -20,6 +23,7 @@ public class Ejecutar {
         this.listaCompuertas = new Lista<>();
         this.listaInterruptores = new Lista<>();
         this.lineas = new Lista<>();
+        this.listaImageView = new Lista<>();
         this.numeroCompuertas = 0;
     }
 
@@ -71,6 +75,9 @@ public class Ejecutar {
      */
     public Lista getlista(){
         return listaCompuertas;
+    }
+    public Lista getListaImageView(){
+        return listaImageView;
     }
 
     /**

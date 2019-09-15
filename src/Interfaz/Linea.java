@@ -1,7 +1,12 @@
 package Interfaz;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+
+
+import static Interfaz.Controller.pane1;
 
 /**
  * Clase encargada de crear las lineas que se dibujan  en el canvas.
@@ -14,27 +19,27 @@ public class Linea {
     private double finX;
     private double finY;
     private boolean valor;
-    private GraphicsContext gc;
+    private Label label;
 
     /**
      * Método constructor de la clase.
-     * @param context recibe el contexto gráfico del canvas.
      */
-    public Linea(GraphicsContext context){
+    public Linea(){
         this.inicioX =0;
         this.inicioY=0;
         this.finX = 0;
         this.finY =0;
-        this.gc = context;
     }
 
     /**
      * Método encargado de dibujar la linea en la posición deseada.
      */
-    private void dibujar(){
-        gc.setStroke(new Color(Math.random(),Math.random(),Math.random(),1));// encargado de dar un color aleatorio.
-        gc.setLineWidth(3.0);
-        gc.strokeLine(inicioX,inicioY,finX,finY);
+    public void dibujar(){
+        Line line = new Line(inicioX,inicioY,finX,finY);
+        line.setStrokeWidth(3.87);
+        line.setStroke(new Color(Math.random(),Math.random(),Math.random(),1));
+        pane1.getChildren().add(line);
+
     }
 
     /**
@@ -67,7 +72,9 @@ public class Linea {
      */
     public void setFinY(double finY) {
         this.finY = finY;
-        dibujar();
+    }
+    public void setLabel(Label l){
+        this.label = l;
     }
 
     /**
