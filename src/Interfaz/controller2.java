@@ -28,8 +28,6 @@ public class controller2 {
     private RadioButton seleccion2;
     @FXML
     private RadioButton seleccion3;
-    @FXML
-    private Button bton;
     private Ejecutar ejecutar;
     public static int compuerta = 0;
     private double orgSceneX;
