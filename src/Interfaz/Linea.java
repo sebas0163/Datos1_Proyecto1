@@ -18,7 +18,8 @@ public class Linea {
     private double inicioY;
     private double finX;
     private double finY;
-    private boolean valor;
+    private int compA;
+    private int compB;
     private Label label;
 
     /**
@@ -73,16 +74,24 @@ public class Linea {
     public void setFinY(double finY) {
         this.finY = finY;
     }
-    public void setLabel(Label l){
-        this.label = l;
-    }
 
     /**
-     * Establece el valor guarda la linea y pertenece a la salida de un interruptor o una entrada.
-     * @param valor dato de tipo booleano.
+     *  Posiciona la compuerta a la que se le tomara su salida.
+     * @param A entrada de tipo entero que representa la posición de la compuerta a la que se le toma´ra su entrada.
      */
-    public void setValor(boolean valor){
-        this.valor = valor;
+    public void setCompA(int A){
+        this.compA = A;
+    }
+    public void setCompB(int B){
+        this.compB = B;
+    }
+
+    public int getCompA() {
+        return compA;
+    }
+
+    public int getCompB() {
+        return compB;
     }
 }
 

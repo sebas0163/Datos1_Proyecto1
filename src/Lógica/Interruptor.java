@@ -15,6 +15,8 @@ public class Interruptor {
     private Lista<Integer> entradasDependientes;//Guarda la posción de la entrada que depende de la salida del interruptor
     private boolean estado;
     private Lista<Image> imagenes;
+    private double posX;
+    private double posY;
 
     /**
      * Método constructor.
@@ -74,5 +76,21 @@ public class Interruptor {
      */
     public Lista<Image> getImage(){
         return imagenes;
+    }
+
+    public void setPosX(double posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(double posY) {
+        this.posY = posY;
+    }
+
+    public double getPosX() {
+        return posX;
+    }
+
+    public double getPosY() {
+        return posY;
     }
 }

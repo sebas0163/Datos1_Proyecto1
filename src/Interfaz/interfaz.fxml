@@ -16,7 +16,7 @@
         <items>
             <StackPane prefHeight="989.0" prefWidth="676.0">
                <children>
-                  <Pane fx:id="pane" onMousePressed="#clickPane" onMouseReleased="#relasePane" prefHeight="200.0" prefWidth="200.0" />
+                  <Pane fx:id="pane"  prefHeight="200.0" prefWidth="200.0" />
                </children>
             </StackPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="989.0" prefWidth="258.0">
@@ -96,9 +96,9 @@
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #0f273b;">
                            <children>
-                              <Button layoutX="32.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Actualizar" />
-                              <Button layoutX="31.0" layoutY="69.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Guardar" />
-                              <Button layoutX="29.0" layoutY="112.0" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="94.0" text="Limpiar" />
+                              <Button fx:id="bton1" layoutX="32.0" layoutY="14.0" mnemonicParsing="false" onAction="#probar" prefHeight="26.0" prefWidth="94.0" text="Probar" />
+                              <Button layoutX="32.0" layoutY="58.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Guardar" />
+                              <Button layoutX="32.0" layoutY="102.0" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="94.0" text="Limpiar" />
                            </children></AnchorPane>
                     </items>
                   </SplitPane>

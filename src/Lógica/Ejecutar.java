@@ -13,7 +13,8 @@ public class Ejecutar {
     private Lista<Linea> lineas;
     private Lista<Compuertas> listaCompuertas;
     private Lista<Interruptor> listaInterruptores;
-    private Lista<ImageView> listaImageView;
+    private Lista<ImageView> listaImageViewComp;
+    private Lista<ImageView> listaImageViewInterr;
     private int numeroCompuertas;
 
     /**
@@ -23,7 +24,8 @@ public class Ejecutar {
         this.listaCompuertas = new Lista<>();
         this.listaInterruptores = new Lista<>();
         this.lineas = new Lista<>();
-        this.listaImageView = new Lista<>();
+        this.listaImageViewComp = new Lista<>();
+        this.listaImageViewInterr = new Lista<>();
         this.numeroCompuertas = 0;
     }
 
@@ -48,7 +50,7 @@ public class Ejecutar {
      * @param a dato de tipo entero que es el número de interruptor a utilizar.
      * @param b dato de tipo entero que indica en que posición de la lista se encuentra la compuerta a utilizar.
      */
-    public void conectarInterrup(int a, int b){
+    public void conectarInterrup(int a, int b) {
         Interruptor select = (Interruptor) listaInterruptores.buscar(a).getDato();
         Compuertas B = (Compuertas) listaCompuertas.buscar(b).getDato();
         select.agregarObservador(B);
@@ -62,11 +64,15 @@ public class Ejecutar {
      * @param b dato de tipo entero que representa la posición de la compuerta a la que se le asignará el valor de su entrada
      */
     public void conexiones(int a,int b){
-        Compuertas B = (Compuertas) listaCompuertas.buscar(b).getDato();
-        Compuertas A = (Compuertas) listaCompuertas.buscar(a).getDato();
-        A.agregarObservador(B);
-        B.setEntradas(A.getSalida(0));// arreglar el operar
-        A.setEntradasDependientes(B.entradas.getLargo()-1);
+        try {
+            Compuertas B = (Compuertas) listaCompuertas.buscar(b).getDato();
+            Compuertas A = (Compuertas) listaCompuertas.buscar(a).getDato();
+            A.agregarObservador(B);
+            B.setEntradas(A.getSalida(0));// arreglar el operar
+            A.setEntradasDependientes(B.entradas.getLargo() - 1);
+        }catch (Exception e){
+            System.out.println("La salida es null");
+        }
     }
 
     /**
@@ -76,8 +82,11 @@ public class Ejecutar {
     public Lista getlista(){
         return listaCompuertas;
     }
-    public Lista getListaImageView(){
-        return listaImageView;
+    public Lista getListaImageViewComp(){
+        return listaImageViewComp;
+    }
+    public Lista getListaImageViewInterr(){
+        return listaImageViewInterr;
     }
 
     /**
@@ -122,7 +131,7 @@ public class Ejecutar {
 
     public static void main(String[] args) {
         Ejecutar e = new Ejecutar();
-        e.añadirInterruptor();// seguir pruebas
+        /*e.añadirInterruptor();// seguir pruebas
         e.añadirInterruptor();
         Interruptor k = (Interruptor) e.listaInterruptores.buscar(1).getDato();
         k.cambiarEstado();
@@ -142,7 +151,16 @@ public class Ejecutar {
         j.cambiarEstado();
         r.mostrar();
         j.cambiarEstado();
-        r.mostrar();
+        r.mostrar();*/
+        e.añadirCompuerta(new Compuerta_AND(2));
+        e.añadirCompuerta(new Compuerta_AND(2));
+        e.conexiones(0,1);
+        e.conexiones(0,1);
+        e.añadirInterruptor();
+        e.conectarInterrup(0,0);
+        e.conectarInterrup(0,0);
+        //e.probar();
+        //Compuertas r = (Compuertas)e.listaCompuertas.buscar(1).getDato();
 
 
     }

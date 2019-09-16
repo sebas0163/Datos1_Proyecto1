@@ -1,9 +1,6 @@
 package Interfaz;
 
-import Lógica.Compuerta_NOT;
-import Lógica.Compuertas;
-import Lógica.Ejecutar;
-import Lógica.Interruptor;
+import Lógica.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,10 +35,89 @@ public class Controller {
     @FXML
     private ImageView comp1;
 
+    EventHandler<MouseEvent> interruptorOnMousePressed = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent t) {
+            if(t.getButton().equals(MouseButton.SECONDARY)){
+                int numInterruptor = ejecución.getListaImageViewInterr().getPos(t.getSource());
+                Interruptor interruptor = (Interruptor) ejecución.getInter().buscar(numInterruptor).getDato();
+                double X = interruptor.getPosX();
+                double Y = interruptor.getPosY();
+                Linea linea = new Linea();
+                linea.setInicioX(X+134);
+                linea.setInicioY(Y+85);
+                linea.setCompA(numInterruptor);
+                ejecución.insertarLinea(linea);
+            }else{
+                orgSceneX = t.getSceneX();
+                orgSceneY = t.getSceneY();
+                orgTranslateX = ((Label)(t.getSource())).getTranslateX();
+                orgTranslateY = ((Label)(t.getSource())).getTranslateY();
+            }
+        }
+    };
+    EventHandler<MouseEvent> interruptorOnMouseReleased = new EventHandler<MouseEvent>() {
+
+        @Override
+        public void handle(MouseEvent t) {
+            if (t.getButton().equals(MouseButton.SECONDARY)) {
+                int numInterruptor = ejecución.getListaImageViewInterr().getPos(t.getSource());
+                Interruptor interruptor = (Interruptor) ejecución.getInter().buscar(numInterruptor).getDato();
+                Linea temp = (Linea) ejecución.getLineas().buscar(ejecución.getLineas().getLargo() - 1).getDato();
+                Lista listaCompuertas = ejecución.getlista();
+                Nodo aux = listaCompuertas.getHead();
+                while (aux != null){
+                    Compuertas comp = (Compuertas) aux.getDato();
+                    double X = interruptor.getPosX();
+                    double Y = interruptor.getPosY();
+                    if ((t.getX()+X >= comp.getPosX() & t.getX()+X <= comp.getPosX()+167)& t.getY()+Y >= comp.getPosY() & t.getY()+Y <= comp.getPosY()+92){
+                        temp.setFinX(t.getX() + X);
+                        temp.setFinY(t.getY() + Y);
+                        temp.setCompB(ejecución.getlista().getPos(comp));
+                        ejecución.conectarInterrup(temp.getCompA(),temp.getCompB());
+                        temp.dibujar();
+                        break;
+                    }else{
+                        aux = aux.getNext();
+                    }
+                }
+            }else{
+                return;
+            }
+        }
+    };
+    EventHandler<MouseEvent> interruptorOnMouseDragged = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent t) {
+            if(t.getButton().equals(MouseButton.SECONDARY)){
+                return;
+            }else{
+                double offsetX = t.getSceneX() - orgSceneX;
+                double offsetY = t.getSceneY() - orgSceneY;
+                double newTranslateX = orgTranslateX + offsetX;
+                double newTranslateY = orgTranslateY + offsetY;
+                ((Label) (t.getSource())).setTranslateX(newTranslateX);
+                ((Label) (t.getSource())).setTranslateY(newTranslateY);
+                int numInterr = ejecución.getListaImageViewInterr().getPos(t.getSource());
+                Interruptor interruptor= (Interruptor) ejecución.getInter().buscar(numInterr).getDato();
+                interruptor.setPosX(newTranslateX);
+                interruptor.setPosY(newTranslateY);
+            }
+        }
+    };
     EventHandler<MouseEvent> LabelOnMousePressedEventHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent t) {
             if(t.getButton().equals(MouseButton.SECONDARY)){
+                int numComp = ejecución.getListaImageViewComp().getPos(t.getSource());
+                Compuertas compuerta = (Compuertas)ejecución.getlista().buscar(numComp).getDato();
+                double X = compuerta.getPosX();
+                double Y = compuerta.getPosY();
+                Linea linea = new Linea();
+                linea.setInicioX(X+167);
+                linea.setInicioY(Y+45);
+                linea.setCompA(numComp);
+                ejecución.insertarLinea(linea);
             }else{
             orgSceneX = t.getSceneX();
             orgSceneY = t.getSceneY();
@@ -50,10 +126,41 @@ public class Controller {
             }
         }
     };
+    EventHandler<MouseEvent> LabelOnMouseReleased = new EventHandler<MouseEvent>() {
+
+        @Override
+        public void handle(MouseEvent t) {
+            if (t.getButton().equals(MouseButton.SECONDARY)) {
+                int numComp = ejecución.getListaImageViewComp().getPos(t.getSource());
+                Compuertas compuerta = (Compuertas) ejecución.getlista().buscar(numComp).getDato();
+                Linea temp = (Linea) ejecución.getLineas().buscar(ejecución.getLineas().getLargo() - 1).getDato();
+                Lista listaCompuertas = ejecución.getlista();
+                Nodo aux = listaCompuertas.getHead();
+                while (aux != null){
+                    Compuertas comp = (Compuertas) aux.getDato();
+                    double X = compuerta.getPosX();
+                    double Y = compuerta.getPosY();
+                    if ((t.getX()+X >= comp.getPosX() & t.getX()+X <= comp.getPosX()+167)& t.getY()+Y >= comp.getPosY() & t.getY()+Y <= comp.getPosY()+92){
+                        temp.setFinX(t.getX() + X);
+                        temp.setFinY(t.getY() + Y);
+                        temp.setCompB(ejecución.getlista().getPos(comp));
+                        ejecución.conexiones(temp.getCompA(),temp.getCompB());
+                        temp.dibujar();
+                        break;
+                    }else{
+                        aux = aux.getNext();
+                    }
+                }
+            }else{
+                return;
+            }
+        }
+    };
     EventHandler<MouseEvent> LabelOnMouseDraggedEventHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent t) {
             if(t.getButton().equals(MouseButton.SECONDARY)){
+                return;
             }else {
                 double offsetX = t.getSceneX() - orgSceneX;
                 double offsetY = t.getSceneY() - orgSceneY;
@@ -61,6 +168,10 @@ public class Controller {
                 double newTranslateY = orgTranslateY + offsetY;
                 ((Label) (t.getSource())).setTranslateX(newTranslateX);
                 ((Label) (t.getSource())).setTranslateY(newTranslateY);
+                int numComp = ejecución.getListaImageViewComp().getPos(t.getSource());
+                Compuertas comp = (Compuertas) ejecución.getlista().buscar(numComp).getDato();
+                comp.setPosX(newTranslateX);
+                comp.setPosY(newTranslateY);
             }
         }
     };
@@ -71,27 +182,9 @@ public class Controller {
         this.pane1 = pane;
     }
 
-    /**
-     * Método que detecta si se está haciendo click en el canvas y envia las posiciones iniciales para dibujar una linea.
-     * @param event
-     */
     @FXML
-    private void clickPane(MouseEvent event){
-        /*Linea l = new Linea();
-        l.setInicioX(event.getX());
-        l.setInicioY(event.getY());
-        ejecución.insertarLinea(l);*/
-    }
-
-    /**
-     * Método que detecta si se está liberando el mouse en el canvas y envia las posiciones finales para dibujar una linea.
-     * @param event
-     */
-    @FXML
-    public void relasePane(MouseEvent event){
-        /*Linea temp = (Linea) ejecución.getLineas().buscar(ejecución.getLineas().getLargo()-1).getDato();
-        temp.setFinX(event.getX());
-        temp.setFinY(event.getY());*/
+    private void probar(){
+        ejecución.probar();
     }
     /**
      * Método que detecta si se seleccionó la compuerta And en la paleta y procede a abrir una ventana de de selección.
@@ -214,6 +307,8 @@ public class Controller {
         label.setGraphic(new ImageView(im));
         label.setOnMousePressed(LabelOnMousePressedEventHandler);
         label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+        label.setOnMouseReleased(LabelOnMouseReleased);
+        ejecución.getListaImageViewComp().add(label);
         pane1.getChildren().add(label);
     }
     /**
@@ -227,8 +322,10 @@ public class Controller {
         Image im = (Image) interr.getImage().buscar(1).getDato();
         Label label = new Label();
         label.setGraphic(new ImageView(im));
-        label.setOnMousePressed(LabelOnMousePressedEventHandler);
-        label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+        label.setOnMousePressed(interruptorOnMousePressed);
+        label.setOnMouseDragged(interruptorOnMouseDragged);
+        label.setOnMouseReleased(interruptorOnMouseReleased);
+        ejecución.getListaImageViewInterr().add(label);
         pane1.getChildren().add(label);
     }
 

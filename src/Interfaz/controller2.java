@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 import static Interfaz.Controller.*;
@@ -50,17 +51,15 @@ public class controller2 {
         @Override
         public void handle(MouseEvent t) {
             if (t.getButton().equals(MouseButton.SECONDARY)){
-                int numComp = ejecutar.getListaImageView().getPos(t.getSource());
-                Label label =(Label) ejecutar.getListaImageView().buscar(0).getDato();
+                int numComp = ejecutar.getListaImageViewComp().getPos(t.getSource());
                 Compuertas compuerta = (Compuertas)ejecutar.getlista().buscar(numComp).getDato();
                 double X = compuerta.getPosX();
                 double Y = compuerta.getPosY();
                 Linea linea = new Linea();
                 linea.setInicioX(X+167);
                 linea.setInicioY(Y+45);
+                linea.setCompA(numComp);
                 ejecutar.insertarLinea(linea);
-
-
             }else {
                 orgSceneX = t.getSceneX();
                 orgSceneY = t.getSceneY();
@@ -74,14 +73,26 @@ public class controller2 {
         @Override
         public void handle(MouseEvent t) {
             if (t.getButton().equals(MouseButton.SECONDARY)) {
-                int numComp = ejecutar.getListaImageView().getPos(t.getSource());
+                int numComp = ejecutar.getListaImageViewComp().getPos(t.getSource());
                 Compuertas compuerta = (Compuertas) ejecutar.getlista().buscar(numComp).getDato();
                 Linea temp = (Linea) ejecución.getLineas().buscar(ejecución.getLineas().getLargo() - 1).getDato();
-                double X = compuerta.getPosX();
-                double Y = compuerta.getPosY();
-                temp.setFinX(t.getX() + X );
-                temp.setFinY(t.getY() + Y );
-                temp.dibujar();
+                Lista listaCompuertas = ejecución.getlista();
+                Nodo aux = listaCompuertas.getHead();
+                while (aux != null){
+                    Compuertas comp = (Compuertas) aux.getDato();
+                    double X = compuerta.getPosX();
+                    double Y = compuerta.getPosY();
+                    if ((t.getX()+X >= comp.getPosX() & t.getX()+X <= comp.getPosX()+167)& t.getY()+Y >= comp.getPosY() & t.getY()+Y <= comp.getPosY()+92){
+                        temp.setFinX(t.getX() + X);
+                        temp.setFinY(t.getY() + Y);
+                        temp.setCompB(ejecución.getlista().getPos(comp));
+                        ejecutar.conexiones(temp.getCompA(),temp.getCompB());
+                        temp.dibujar();
+                        break;
+                    }else{
+                        aux = aux.getNext();
+                    }
+                }
             }else{
                 return;
             }
@@ -99,7 +110,7 @@ public class controller2 {
                 double newTranslateY = orgTranslateY + offsetY;
                 ((Label) (t.getSource())).setTranslateX(newTranslateX);
                 ((Label) (t.getSource())).setTranslateY(newTranslateY);
-                int numComp = ejecutar.getListaImageView().getPos(t.getSource());
+                int numComp = ejecutar.getListaImageViewComp().getPos(t.getSource());
                 Compuertas comp = (Compuertas) ejecutar.getlista().buscar(numComp).getDato();
                 comp.setPosX(newTranslateX);
                 comp.setPosY(newTranslateY);
@@ -145,9 +156,8 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
-                    System.out.println(im);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_AND(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
@@ -157,7 +167,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_AND(4));
@@ -168,7 +178,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 }
                 break;
@@ -182,7 +192,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_OR(3));
@@ -193,7 +203,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_OR(4));
@@ -204,7 +214,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 }
                 break;
@@ -218,7 +228,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_NAND(3));
@@ -229,7 +239,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_NAND(4));
@@ -240,7 +250,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 }
                 break;
@@ -254,7 +264,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_NOR(3));
@@ -265,7 +275,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_NOR(4));
@@ -276,7 +286,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 }
                 break;
@@ -290,7 +300,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_XOR(3));
@@ -301,7 +311,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_XOR(4));
@@ -312,7 +322,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 }
                 break;
@@ -326,7 +336,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_NXOR(3));
@@ -337,7 +347,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_NXOR(4));
@@ -348,7 +358,7 @@ public class controller2 {
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
-                    ejecutar.getListaImageView().add(label);
+                    ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().add(label);
                 }
                 break;
