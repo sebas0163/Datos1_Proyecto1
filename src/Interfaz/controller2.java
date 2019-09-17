@@ -48,16 +48,20 @@ public class controller2 {
     EventHandler<MouseEvent> LabelOnMousePressedEventHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent t) {
-            if (t.getButton().equals(MouseButton.SECONDARY)){
+            if (t.getButton().equals(MouseButton.SECONDARY) & !(t.isAltDown())) {
                 int numComp = ejecutar.getListaImageViewComp().getPos(t.getSource());
-                Compuertas compuerta = (Compuertas)ejecutar.getlista().buscar(numComp).getDato();
+                Compuertas compuerta = (Compuertas) ejecutar.getlista().buscar(numComp).getDato();
                 double X = compuerta.getPosX();
                 double Y = compuerta.getPosY();
                 Linea linea = new Linea();
-                linea.setInicioX(X+167);
-                linea.setInicioY(Y+45);
+                linea.setInicioX(X + 167);
+                linea.setInicioY(Y + 45);
                 linea.setCompA(numComp);
-                ejecutar.insertarLinea(linea,1);
+                ejecutar.insertarLinea(linea, 1);
+            }else if(t.isAltDown() & t.getButton().equals(MouseButton.SECONDARY)){ //Con este evento se elimina la compuerta seleccionada y con ella todos los datos dependientes .
+                Label label = (Label) t.getSource(); //Se toma la compuerta sleccionada
+                ejecutar.eliminarCompuerta(label);
+                pane1.getChildren().remove(label); //Se elimina la imagen de la interfaz
             }else {
                 orgSceneX = t.getSceneX();
                 orgSceneY = t.getSceneY();
@@ -70,7 +74,7 @@ public class controller2 {
 
         @Override
         public void handle(MouseEvent t) {
-            if (t.getButton().equals(MouseButton.SECONDARY)) {
+            if (t.getButton().equals(MouseButton.SECONDARY) & !(t.isAltDown())) {
                 int numComp = ejecutar.getListaImageViewComp().getPos(t.getSource());
                 Compuertas compuerta = (Compuertas) ejecutar.getlista().buscar(numComp).getDato();
                 Linea temp = (Linea) ejecución.getLineasComp().buscar(ejecución.getLineasComp().getLargo() - 1).getDato();

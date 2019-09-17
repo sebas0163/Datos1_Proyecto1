@@ -35,16 +35,20 @@ public class Controller {
     EventHandler<MouseEvent> interruptorOnMousePressed = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent t) {
-            if(t.getButton().equals(MouseButton.SECONDARY)){
+            if (t.getButton().equals(MouseButton.SECONDARY) & !(t.isAltDown())) {
                 int numInterruptor = ejecución.getListaImageViewInterr().getPos(t.getSource());
                 Interruptor interruptor = (Interruptor) ejecución.getInter().buscar(numInterruptor).getDato();
                 double X = interruptor.getPosX();
                 double Y = interruptor.getPosY();
                 Linea linea = new Linea();
-                linea.setInicioX(X+134);
-                linea.setInicioY(Y+85);
+                linea.setInicioX(X + 134);
+                linea.setInicioY(Y + 85);
                 linea.setCompA(numInterruptor);
-                ejecución.insertarLinea(linea,2);
+                ejecución.insertarLinea(linea, 2);
+            }else if(t.isAltDown() & t.getButton().equals(MouseButton.SECONDARY)){ //Con este evento se elimina la compuerta seleccionada y con ella todos los datos dependientes .
+                Label label = (Label) t.getSource(); //Se toma la compuerta sleccionada
+                ejecución.eliminarInterruptor(label);
+                pane.getChildren().remove(label); //Se elimina la imagen de la interfaz
             }else{
                 orgSceneX = t.getSceneX();
                 orgSceneY = t.getSceneY();
@@ -57,7 +61,7 @@ public class Controller {
 
         @Override
         public void handle(MouseEvent t) {
-            if (t.getButton().equals(MouseButton.SECONDARY)) {
+            if (t.getButton().equals(MouseButton.SECONDARY) & !(t.isAltDown())) {
                 int numInterruptor = ejecución.getListaImageViewInterr().getPos(t.getSource());
                 Interruptor interruptor = (Interruptor) ejecución.getInter().buscar(numInterruptor).getDato();
                 Linea temp = (Linea) ejecución.getLineasInterr().buscar(ejecución.getLineasInterr().getLargo() - 1).getDato();
@@ -86,7 +90,7 @@ public class Controller {
     EventHandler<MouseEvent> interruptorOnMouseDragged = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent t) {
-            if(t.getButton().equals(MouseButton.SECONDARY)){
+            if(t.getButton().equals(MouseButton.SECONDARY) & !(t.isAltDown())){
                 return;
             }else{
                 double offsetX = t.getSceneX() - orgSceneX;

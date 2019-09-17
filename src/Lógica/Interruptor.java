@@ -86,6 +86,14 @@ public class Interruptor {
         this.posY = posY;
     }
 
+    public Lista<Integer> getEntradasDependientes() {
+        return entradasDependientes;
+    }
+
+    public Lista<Compuertas> getObservadores() {
+        return observadores;
+    }
+
     public double getPosX() {
         return posX;
     }

@@ -2,10 +2,7 @@ package Lógica;
 
 import Interfaz.Linea;
 import javafx.scene.control.Label;
-
-import javax.sound.sampled.Line;
-import javax.swing.text.html.ImageView;
-import java.awt.*;
+import javafx.scene.image.ImageView;
 
 import static Interfaz.Controller.pane1;
 
@@ -22,6 +19,7 @@ public class Ejecutar {
     private Lista<ImageView> listaImageViewComp;
     private Lista<ImageView> listaImageViewInterr;
     private int numeroCompuertas;
+
 
     /**
      * Método constructor de la clase
@@ -146,6 +144,33 @@ public class Ejecutar {
         return numeroCompuertas;
     }
 
+    public void eliminarInterruptor(Label label){
+        int numeroInterruptor = listaImageViewInterr.getPos(label);
+        Interruptor interruptor = (Interruptor) listaInterruptores.buscar(numeroInterruptor).getDato();
+        Nodo temporal = interruptor.getObservadores().getHead();
+        int indice = 0;
+        while (temporal != null){
+            Compuertas aux = (Compuertas) temporal.getDato();
+            aux.getEntradas().eliminar((Integer) aux.getEntradasDependientes().buscar(indice).getDato());
+            aux.setIndice(aux.getIndice()-1);
+            indice ++;
+            temporal = temporal.getNext();
+        }
+        temporal = lineasInterr.getHead();
+        while (temporal != null){
+            Linea linea = (Linea) temporal.getDato();
+            if(linea.getCompA() == numeroInterruptor){
+                lineasInterr.eliminar(lineasInterr.getPos(linea));
+                pane1.getChildren().remove(linea.getLineaDibujada());
+                temporal = temporal.getNext();
+            }else{
+                temporal = temporal.getNext();
+            }
+        }
+        listaImageViewInterr.eliminar(numeroInterruptor);
+        listaInterruptores.eliminar(numeroInterruptor);
+    }
+
     /**
      * Método encargado de eliminar una compuerta, también es el encargado de actualizar todas las listas y observadores
      * @param label contenerdor de la compuerta
@@ -171,7 +196,7 @@ public class Ejecutar {
         int indice = 0;
         while (temporal != null){ //bucle encargado de eliminar las entradas que dependen de la salida de la compuerta.
             Compuertas aux = (Compuertas) temporal.getDato();
-            aux.getEntradas().eliminar((Integer) aux.getEntradasDependientes().buscar(indice).getDato());
+            aux.getEntradas().eliminar((Integer) comp.getEntradasDependientes().buscar(indice).getDato());
             aux.setIndice(aux.getIndice()-1);
             indice ++;
             temporal = temporal.getNext();
