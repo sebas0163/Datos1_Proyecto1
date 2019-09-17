@@ -20,7 +20,7 @@ public class Linea {
     private double finY;
     private int compA;
     private int compB;
-    private Label label;
+    private Line lineaDibujada;
 
     /**
      * Método constructor de la clase.
@@ -39,6 +39,7 @@ public class Linea {
         Line line = new Line(inicioX,inicioY,finX,finY);
         line.setStrokeWidth(3.87);
         line.setStroke(new Color(Math.random(),Math.random(),Math.random(),1));
+        this.lineaDibujada = line;
         pane1.getChildren().add(line);
 
     }
@@ -92,6 +93,10 @@ public class Linea {
 
     public int getCompB() {
         return compB;
+    }
+
+    public Line getLineaDibujada() {
+        return lineaDibujada;
     }
 }
 

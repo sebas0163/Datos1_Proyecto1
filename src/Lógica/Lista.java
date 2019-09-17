@@ -119,6 +119,7 @@ public class Lista<T> {
     public void eliminar(int posicion) {
         if(posicion == 0){
             this.head = this.head.getNext();
+            largo --;
         }else {
             Nodo prev = this.head;
             Nodo temp = prev.getNext();
@@ -129,6 +130,7 @@ public class Lista<T> {
                 indice++;
             }
             prev.setNext(temp.getNext());
+            largo --;
         }
     }
 

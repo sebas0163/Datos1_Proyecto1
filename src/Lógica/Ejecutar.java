@@ -1,8 +1,13 @@
 package Lógica;
 
 import Interfaz.Linea;
+import javafx.scene.control.Label;
 
+import javax.sound.sampled.Line;
 import javax.swing.text.html.ImageView;
+import java.awt.*;
+
+import static Interfaz.Controller.pane1;
 
 /**
  * Clase encargada de manejar la logica de las compuertas que son agragadas al area de trabajo.
@@ -10,7 +15,8 @@ import javax.swing.text.html.ImageView;
  * @date 02/09/19
  */
 public class Ejecutar {
-    private Lista<Linea> lineas;
+    private Lista<Linea> lineasComp;
+    private Lista<Linea> lineasInterr;
     private Lista<Compuertas> listaCompuertas;
     private Lista<Interruptor> listaInterruptores;
     private Lista<ImageView> listaImageViewComp;
@@ -23,10 +29,11 @@ public class Ejecutar {
     public Ejecutar() {
         this.listaCompuertas = new Lista<>();
         this.listaInterruptores = new Lista<>();
-        this.lineas = new Lista<>();
+        this.lineasComp = new Lista<>();
         this.listaImageViewComp = new Lista<>();
         this.listaImageViewInterr = new Lista<>();
         this.numeroCompuertas = 0;
+        this.lineasInterr = new Lista<>();
     }
 
     /**
@@ -54,6 +61,7 @@ public class Ejecutar {
         Interruptor select = (Interruptor) listaInterruptores.buscar(a).getDato();
         Compuertas B = (Compuertas) listaCompuertas.buscar(b).getDato();
         select.agregarObservador(B);
+        System.out.println(B.getIndice());
         B.setEntradas(select.isEstado());
         select.setEntradasDependientes(B.entradas.getLargo() -1);
     }
@@ -68,6 +76,7 @@ public class Ejecutar {
             Compuertas B = (Compuertas) listaCompuertas.buscar(b).getDato();
             Compuertas A = (Compuertas) listaCompuertas.buscar(a).getDato();
             A.agregarObservador(B);
+            System.out.println(B.getIndice());
             B.setEntradas(A.getSalida(0));// arreglar el operar
             A.setEntradasDependientes(B.entradas.getLargo() - 1);
         }catch (Exception e){
@@ -109,16 +118,24 @@ public class Ejecutar {
      * Método encargado de añadir una linea a la lista de lineas.
      * @param l dato de tipo linea, que contiene a la linea dibujada.
      */
-    public void insertarLinea(Linea l){
-        lineas.add(l);
+    public void insertarLinea(Linea l,int identificador) {
+        if (identificador == 1) {
+            lineasComp.add(l);
+        }else{
+            lineasInterr.add(l);
+        }
     }
 
     /**
      * Método que devuleve la lista con las lineas dibujadas.
      * @return lineas dibujadas.
      */
-    public Lista getLineas(){
-        return lineas;
+    public Lista getLineasComp(){
+        return lineasComp;
+    }
+
+    public Lista getLineasInterr(){
+        return lineasInterr;
     }
 
     /**
@@ -129,9 +146,66 @@ public class Ejecutar {
         return numeroCompuertas;
     }
 
+    /**
+     * Método encargado de eliminar una compuerta, también es el encargado de actualizar todas las listas y observadores
+     * @param label contenerdor de la compuerta
+     */
+    public void eliminarCompuerta(Label label){
+        numeroCompuertas --;
+        int numeroCompuerta = listaImageViewComp.getPos(label);
+        Compuertas comp = (Compuertas) listaCompuertas.buscar(numeroCompuerta).getDato();
+        Nodo temporal = listaCompuertas.getHead();
+        while (temporal != null) {  // bucle que permite borrar a la compuerta de las listas de observadores de otras compuertas
+            Compuertas aux = (Compuertas) temporal.getDato();
+            if (aux.getObservadores().getHead()== null) {
+                System.out.println("No hay observadores");
+            } else {
+                while (aux.getObservadores().verificar(comp)) {
+                    aux.getEntradasDependientes().eliminar(aux.getObservadores().getPos(comp));// Arreglar error
+                    aux.getObservadores().eliminar(aux.getObservadores().getPos(comp));
+                }
+            }
+            temporal = temporal.getNext();
+        }
+        temporal = comp.getObservadores().getHead();
+        int indice = 0;
+        while (temporal != null){ //bucle encargado de eliminar las entradas que dependen de la salida de la compuerta.
+            Compuertas aux = (Compuertas) temporal.getDato();
+            aux.getEntradas().eliminar((Integer) aux.getEntradasDependientes().buscar(indice).getDato());
+            aux.setIndice(aux.getIndice()-1);
+            indice ++;
+            temporal = temporal.getNext();
+        }
+        temporal = lineasComp.getHead();
+        while(temporal != null){ // bucle encargado de eliminar lineasde conexiones entre compuertas que tengan datos dependientes a la compuerta a eliminar
+            Linea linea = (Linea) temporal.getDato();
+            if(linea.getCompA() == numeroCompuerta || linea.getCompB() == numeroCompuerta){
+                lineasComp.eliminar(lineasComp.getPos(linea));
+                pane1.getChildren().remove(linea.getLineaDibujada());
+                temporal = temporal.getNext();
+            }else{
+                temporal = temporal.getNext();
+            }
+        }
+        temporal = lineasInterr.getHead();
+        while (temporal != null){ //bucle encargado de eliminar las lines de conexiones entre interruptor y compuertas que poseen datos de la compuerta a eliminar.
+            Linea linea = (Linea) temporal.getDato();
+            if(linea.getCompB() == numeroCompuerta){
+                lineasInterr.eliminar(lineasInterr.getPos(linea));
+                pane1.getChildren().remove(linea.getLineaDibujada());
+                temporal = temporal.getNext();
+            }else{
+                temporal = temporal.getNext();
+            }
+        }
+        listaCompuertas.eliminar(numeroCompuerta);
+        listaImageViewComp.eliminar(numeroCompuerta);
+
+    }
+
     public static void main(String[] args) {
         Ejecutar e = new Ejecutar();
-        /*e.añadirInterruptor();// seguir pruebas
+        e.añadirInterruptor();// seguir pruebas
         e.añadirInterruptor();
         Interruptor k = (Interruptor) e.listaInterruptores.buscar(1).getDato();
         k.cambiarEstado();
@@ -151,14 +225,14 @@ public class Ejecutar {
         j.cambiarEstado();
         r.mostrar();
         j.cambiarEstado();
-        r.mostrar();*/
-        e.añadirCompuerta(new Compuerta_AND(2));
+        r.mostrar();
+        /*e.añadirCompuerta(new Compuerta_AND(2));
         e.añadirCompuerta(new Compuerta_AND(2));
         e.conexiones(0,1);
         e.conexiones(0,1);
         e.añadirInterruptor();
         e.conectarInterrup(0,0);
-        e.conectarInterrup(0,0);
+        e.conectarInterrup(0,0);*/
         //e.probar();
         //Compuertas r = (Compuertas)e.listaCompuertas.buscar(1).getDato();
 

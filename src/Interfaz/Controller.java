@@ -5,15 +5,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 import static Interfaz.controller2.compuerta;
@@ -47,7 +44,7 @@ public class Controller {
                 linea.setInicioX(X+134);
                 linea.setInicioY(Y+85);
                 linea.setCompA(numInterruptor);
-                ejecución.insertarLinea(linea);
+                ejecución.insertarLinea(linea,2);
             }else{
                 orgSceneX = t.getSceneX();
                 orgSceneY = t.getSceneY();
@@ -63,7 +60,7 @@ public class Controller {
             if (t.getButton().equals(MouseButton.SECONDARY)) {
                 int numInterruptor = ejecución.getListaImageViewInterr().getPos(t.getSource());
                 Interruptor interruptor = (Interruptor) ejecución.getInter().buscar(numInterruptor).getDato();
-                Linea temp = (Linea) ejecución.getLineas().buscar(ejecución.getLineas().getLargo() - 1).getDato();
+                Linea temp = (Linea) ejecución.getLineasInterr().buscar(ejecución.getLineasInterr().getLargo() - 1).getDato();
                 Lista listaCompuertas = ejecución.getlista();
                 Nodo aux = listaCompuertas.getHead();
                 while (aux != null){
@@ -73,8 +70,8 @@ public class Controller {
                     if ((t.getX()+X >= comp.getPosX() & t.getX()+X <= comp.getPosX()+167)& t.getY()+Y >= comp.getPosY() & t.getY()+Y <= comp.getPosY()+92){
                         temp.setFinX(t.getX() + X);
                         temp.setFinY(t.getY() + Y);
+                        System.out.println(ejecución.getlista().getPos(comp));
                         temp.setCompB(ejecución.getlista().getPos(comp));
-                        ejecución.conectarInterrup(temp.getCompA(),temp.getCompB());
                         temp.dibujar();
                         break;
                     }else{
@@ -108,16 +105,20 @@ public class Controller {
     EventHandler<MouseEvent> LabelOnMousePressedEventHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent t) {
-            if(t.getButton().equals(MouseButton.SECONDARY)){
+            if(t.getButton().equals(MouseButton.SECONDARY) & !(t.isAltDown())) {
                 int numComp = ejecución.getListaImageViewComp().getPos(t.getSource());
-                Compuertas compuerta = (Compuertas)ejecución.getlista().buscar(numComp).getDato();
+                Compuertas compuerta = (Compuertas) ejecución.getlista().buscar(numComp).getDato();
                 double X = compuerta.getPosX();
                 double Y = compuerta.getPosY();
                 Linea linea = new Linea();
-                linea.setInicioX(X+167);
-                linea.setInicioY(Y+45);
+                linea.setInicioX(X + 167);
+                linea.setInicioY(Y + 45);
                 linea.setCompA(numComp);
-                ejecución.insertarLinea(linea);
+                ejecución.insertarLinea(linea, 1);
+            }else if(t.isAltDown() & t.getButton().equals(MouseButton.SECONDARY)){ //Con este evento se elimina la compuerta seleccionada y con ella todos los datos dependientes .
+                Label label = (Label) t.getSource(); //Se toma la compuerta sleccionada
+                ejecución.eliminarCompuerta(label);
+                pane.getChildren().remove(label); //Se elimina la imagen de la interfaz
             }else{
             orgSceneX = t.getSceneX();
             orgSceneY = t.getSceneY();
@@ -130,10 +131,10 @@ public class Controller {
 
         @Override
         public void handle(MouseEvent t) {
-            if (t.getButton().equals(MouseButton.SECONDARY)) {
+            if (t.getButton().equals(MouseButton.SECONDARY) & !(t.isAltDown())) {
                 int numComp = ejecución.getListaImageViewComp().getPos(t.getSource());
                 Compuertas compuerta = (Compuertas) ejecución.getlista().buscar(numComp).getDato();
-                Linea temp = (Linea) ejecución.getLineas().buscar(ejecución.getLineas().getLargo() - 1).getDato();
+                Linea temp = (Linea) ejecución.getLineasComp().buscar(ejecución.getLineasComp().getLargo() - 1).getDato();
                 Lista listaCompuertas = ejecución.getlista();
                 Nodo aux = listaCompuertas.getHead();
                 while (aux != null){
@@ -144,7 +145,6 @@ public class Controller {
                         temp.setFinX(t.getX() + X);
                         temp.setFinY(t.getY() + Y);
                         temp.setCompB(ejecución.getlista().getPos(comp));
-                        ejecución.conexiones(temp.getCompA(),temp.getCompB());
                         temp.dibujar();
                         break;
                     }else{
@@ -184,7 +184,23 @@ public class Controller {
 
     @FXML
     private void probar(){
+        Lista lineasInterruptores = ejecución.getLineasInterr();
+        Lista lineasCompuertas = ejecución.getLineasComp();
+        Nodo temp1 = lineasInterruptores.getHead();
+        Nodo temp2 = lineasCompuertas.getHead();
+        while (temp1 != null){
+            Linea linea = (Linea) temp1.getDato();
+            ejecución.conectarInterrup(linea.getCompA(),linea.getCompB());
+            temp1 = temp1.getNext();
+        }
+        while(temp2 != null){
+            Linea linea = (Linea) temp2.getDato();
+            ejecución.conexiones(linea.getCompA(),linea.getCompB());
+            temp2 = temp2.getNext();
+        }
         ejecución.probar();
+        Compuertas comp = (Compuertas) ejecución.getlista().buscar(ejecución.getlista().getLargo()-1).getDato();
+        comp.mostrar();
     }
     /**
      * Método que detecta si se seleccionó la compuerta And en la paleta y procede a abrir una ventana de de selección.

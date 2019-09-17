@@ -57,7 +57,7 @@ public class controller2 {
                 linea.setInicioX(X+167);
                 linea.setInicioY(Y+45);
                 linea.setCompA(numComp);
-                ejecutar.insertarLinea(linea);
+                ejecutar.insertarLinea(linea,1);
             }else {
                 orgSceneX = t.getSceneX();
                 orgSceneY = t.getSceneY();
@@ -73,7 +73,7 @@ public class controller2 {
             if (t.getButton().equals(MouseButton.SECONDARY)) {
                 int numComp = ejecutar.getListaImageViewComp().getPos(t.getSource());
                 Compuertas compuerta = (Compuertas) ejecutar.getlista().buscar(numComp).getDato();
-                Linea temp = (Linea) ejecución.getLineas().buscar(ejecución.getLineas().getLargo() - 1).getDato();
+                Linea temp = (Linea) ejecución.getLineasComp().buscar(ejecución.getLineasComp().getLargo() - 1).getDato();
                 Lista listaCompuertas = ejecución.getlista();
                 Nodo aux = listaCompuertas.getHead();
                 while (aux != null){
@@ -84,7 +84,6 @@ public class controller2 {
                         temp.setFinX(t.getX() + X);
                         temp.setFinY(t.getY() + Y);
                         temp.setCompB(ejecución.getlista().getPos(comp));
-                        ejecutar.conexiones(temp.getCompA(),temp.getCompB());
                         temp.dibujar();
                         break;
                     }else{

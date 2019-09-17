@@ -52,6 +52,17 @@ public abstract class Compuertas {
             index ++;
         }
     }
+    protected void notificarEliminar(){
+        Nodo temp = observadores.getHead();
+        int index = 0;
+        while(temp != null){
+            Compuertas comp = (Compuertas) temp.getDato();
+            int pos = (int) entradasDependientes.buscar(index).getDato();
+            comp.eliminarEntrada(pos);
+            temp = temp.getNext();
+            index ++;
+        }
+    }
 
     /**
      * Método que incerta la cantidad de entradas dependientes de una salida.
@@ -114,6 +125,18 @@ public abstract class Compuertas {
         return salida;
     }
 
+    public Lista<Boolean> getEntradas() {
+        return entradas;
+    }
+
+    public Lista<Integer> getEntradasDependientes() {
+        return entradasDependientes;
+    }
+
+    public Lista<Compuertas> getObservadores() {
+        return observadores;
+    }
+
     public double getPosX() {
         return posX;
     }
@@ -128,6 +151,12 @@ public abstract class Compuertas {
 
     public void setPosY(double posY) {
         this.posY = posY;
+    }
+    public int getIndice(){
+        return indice;
+    }
+    public void setIndice(int indice){
+        this.indice = indice;
     }
 
     /**
