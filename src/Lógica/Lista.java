@@ -36,6 +36,12 @@ public class Lista<T> {
             largo ++;
         }
     }
+
+    /**
+     * Método encargado de cambiar los datos almacenados en el nodo.
+     * @param pos posición donde se encuentra el nodo
+     * @param dato nuevo dato que se va a almacenar en el nodo
+     */
     public void modificarNodo(int pos,T dato){
         int indice =0;
         Nodo temp = this.head;

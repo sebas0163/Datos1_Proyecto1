@@ -1,6 +1,7 @@
 package Lógica;
 
 import javafx.scene.image.Image;
+import javafx.scene.shape.Circle;
 
 /**
  * Superclase encargada de definir los métodos y atributos que heredarán las clases hijas.
@@ -17,6 +18,8 @@ public abstract class Compuertas {
     protected int numeroEntradas;
     protected double posX;
     protected double posY;
+    protected Lista<Circle> circulos;
+    protected int circulosDisponibles; // circulo a donde va a terminar a la linea dibujada
 
     /**
      * Método constructor, que define el valor de los atributos.
@@ -28,6 +31,8 @@ public abstract class Compuertas {
         this.observadores = new Lista<>();
         this.entradasDependientes = new Lista<>();
         this.imagenes = new Lista<>();
+        this.circulos= new Lista<>();
+        this.circulosDisponibles = 1;
     }
 
     /**
@@ -157,6 +162,17 @@ public abstract class Compuertas {
     }
     public void setIndice(int indice){
         this.indice = indice;
+    }
+    public Lista getCirculos(){
+        return circulos;
+    }
+
+    public int getCirculosDisponibles() {
+        return circulosDisponibles;
+    }
+
+    public void setCirculosDisponibles(int circulosDisponibles) {
+        this.circulosDisponibles = circulosDisponibles;
     }
 
     /**

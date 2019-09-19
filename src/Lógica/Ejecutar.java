@@ -132,6 +132,10 @@ public class Ejecutar {
         return lineasComp;
     }
 
+    /**
+     * Método encargado de devolver las lista de lineas concetadas al interruptor.
+     * @return
+     */
     public Lista getLineasInterr(){
         return lineasInterr;
     }
@@ -144,12 +148,16 @@ public class Ejecutar {
         return numeroCompuertas;
     }
 
+    /**
+     * Método encargado de elimnar un interruptor y los datos asociados a este.
+     * @param label es el label en donde se encuentra el dato a eliminar.
+     */
     public void eliminarInterruptor(Label label){
         int numeroInterruptor = listaImageViewInterr.getPos(label);
         Interruptor interruptor = (Interruptor) listaInterruptores.buscar(numeroInterruptor).getDato();
         Nodo temporal = interruptor.getObservadores().getHead();
         int indice = 0;
-        while (temporal != null){
+        while (temporal != null){//Elimina las entradas que están dependientes al interruptor
             Compuertas aux = (Compuertas) temporal.getDato();
             aux.getEntradas().eliminar((Integer) aux.getEntradasDependientes().buscar(indice).getDato());
             aux.setIndice(aux.getIndice()-1);
@@ -157,7 +165,7 @@ public class Ejecutar {
             temporal = temporal.getNext();
         }
         temporal = lineasInterr.getHead();
-        while (temporal != null){
+        while (temporal != null){ // elimina todas las lineas que tienen datos del interruptor.
             Linea linea = (Linea) temporal.getDato();
             if(linea.getCompA() == numeroInterruptor){
                 lineasInterr.eliminar(lineasInterr.getPos(linea));

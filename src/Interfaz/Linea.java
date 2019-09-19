@@ -1,11 +1,14 @@
 package Interfaz;
 
+import Lógica.Compuertas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
 
+import static Interfaz.Controller.ejecución;
 import static Interfaz.Controller.pane1;
 
 /**
@@ -36,9 +39,16 @@ public class Linea {
      * Método encargado de dibujar la linea en la posición deseada.
      */
     public void dibujar(){
-        Line line = new Line(inicioX,inicioY,finX,finY);
+        Line line = new Line();
+        Compuertas comp1 = (Compuertas) ejecución.getlista().buscar(compA).getDato();
+        Compuertas comp2 = (Compuertas) ejecución.getlista().buscar(compB).getDato();
+        line.startXProperty().bind(((Circle)comp1.getCirculos().buscar(0).getDato()).centerXProperty());
+        line.startYProperty().bind(((Circle)comp1.getCirculos().buscar(0).getDato()).centerYProperty());
+        line.endXProperty().bind(((Circle)comp2.getCirculos().buscar(comp2.getCirculosDisponibles()).getDato()).centerXProperty());
+        line.endYProperty().bind(((Circle)comp2.getCirculos().buscar(comp2.getCirculosDisponibles()).getDato()).centerYProperty());
         line.setStrokeWidth(3.87);
         line.setStroke(new Color(Math.random(),Math.random(),Math.random(),1));
+        comp2.setCirculosDisponibles(comp2.getCirculosDisponibles() + 1);
         this.lineaDibujada = line;
         pane1.getChildren().add(line);
 
