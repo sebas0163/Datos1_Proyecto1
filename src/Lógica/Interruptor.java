@@ -1,9 +1,8 @@
 package Lógica;
 
 import javafx.scene.image.Image;
+import javafx.scene.shape.Circle;
 
-import java.awt.*;
-import java.sql.Array;
 
 /**
  * Clase encargada de dar un valor true o false a una entrada.
@@ -17,6 +16,7 @@ public class Interruptor {
     private Lista<Image> imagenes;
     private double posX;
     private double posY;
+    private Circle circle;
 
     /**
      * Método constructor.
@@ -33,12 +33,26 @@ public class Interruptor {
             System.out.println("error al cargar imagenes");
         }
     }
+
+    /**
+     * Método encargado de establcer la entrada de la compuerta que está dependiente al interruptor.
+     * @param pos
+     */
     public void setEntradasDependientes(int pos){
         entradasDependientes.add(pos);
     }
+
+    /**
+     * Método encargado añadir un nuevo observador a la lista de observadores.
+     * @param comp nuevo observador.
+     */
     public void agregarObservador(Compuertas comp){
         observadores.add(comp);
     }
+
+    /**
+     * Método encargado de enviar a cada observador la notificación de que el estado del interruptor a cambiado.
+     */
     public void notificar(){
         Nodo temp = observadores.getHead();
         int index = 0;
@@ -86,12 +100,16 @@ public class Interruptor {
         this.posY = posY;
     }
 
-    public Lista<Integer> getEntradasDependientes() {
-        return entradasDependientes;
-    }
-
     public Lista<Compuertas> getObservadores() {
         return observadores;
+    }
+
+    public Circle getCircle() {
+        return circle;
+    }
+
+    public void setCircle(Circle circle) {
+        this.circle = circle;
     }
 
     public double getPosX() {

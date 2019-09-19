@@ -3,6 +3,7 @@ package Lógica;
 import Interfaz.Linea;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
 
 import static Interfaz.Controller.pane1;
 
@@ -168,6 +169,8 @@ public class Ejecutar {
         while (temporal != null){ // elimina todas las lineas que tienen datos del interruptor.
             Linea linea = (Linea) temporal.getDato();
             if(linea.getCompA() == numeroInterruptor){
+                Compuertas compuertas = (Compuertas) listaCompuertas.buscar(linea.getCompB()).getDato();
+                compuertas.setCirculosDisponibles(compuertas.getCirculosDisponibles()-1);
                 lineasInterr.eliminar(lineasInterr.getPos(linea));
                 pane1.getChildren().remove(linea.getLineaDibujada());
                 temporal = temporal.getNext();
@@ -175,6 +178,7 @@ public class Ejecutar {
                 temporal = temporal.getNext();
             }
         }
+        pane1.getChildren().remove(interruptor.getCircle());
         listaImageViewInterr.eliminar(numeroInterruptor);
         listaInterruptores.eliminar(numeroInterruptor);
     }
@@ -210,9 +214,11 @@ public class Ejecutar {
             temporal = temporal.getNext();
         }
         temporal = lineasComp.getHead();
-        while(temporal != null){ // bucle encargado de eliminar lineasde conexiones entre compuertas que tengan datos dependientes a la compuerta a eliminar
+        while(temporal != null){ // bucle encargado de eliminar lineas de conexion entre compuertas que tengan datos dependientes a la compuerta a eliminar
             Linea linea = (Linea) temporal.getDato();
             if(linea.getCompA() == numeroCompuerta || linea.getCompB() == numeroCompuerta){
+                Compuertas compuertas = (Compuertas) listaCompuertas.buscar(linea.getCompB()).getDato();
+                compuertas.setCirculosDisponibles(compuertas.getCirculosDisponibles()-1);
                 lineasComp.eliminar(lineasComp.getPos(linea));
                 pane1.getChildren().remove(linea.getLineaDibujada());
                 temporal = temporal.getNext();
@@ -224,12 +230,20 @@ public class Ejecutar {
         while (temporal != null){ //bucle encargado de eliminar las lines de conexiones entre interruptor y compuertas que poseen datos de la compuerta a eliminar.
             Linea linea = (Linea) temporal.getDato();
             if(linea.getCompB() == numeroCompuerta){
+                Compuertas compuertas = (Compuertas) listaCompuertas.buscar(linea.getCompB()).getDato();
+                compuertas.setCirculosDisponibles(compuertas.getCirculosDisponibles()-1);
                 lineasInterr.eliminar(lineasInterr.getPos(linea));
                 pane1.getChildren().remove(linea.getLineaDibujada());
                 temporal = temporal.getNext();
             }else{
                 temporal = temporal.getNext();
             }
+        }
+        temporal = comp.getCirculos().getHead();
+        while (temporal != null){
+            Circle circle = (Circle) temporal.getDato();
+            pane1.getChildren().remove(circle);
+            temporal = temporal.getNext();
         }
         listaCompuertas.eliminar(numeroCompuerta);
         listaImageViewComp.eliminar(numeroCompuerta);

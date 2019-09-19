@@ -45,9 +45,13 @@ public class controller2 {
         ejecutar = ejecución;
     }
     EventHandler<MouseEvent> LabelOnMousePressedEventHandler = new EventHandler<MouseEvent>() {
+        /**
+         * Método encargado de atender todos los eventos relacionados al presionar un Label, entre estos eventos se encuentran elde dibujar una linea, comenzar el drag and drop y elimnar la compuerta.
+         * @param t instancia derivada de la clase MouseEvent.
+         */
         @Override
         public void handle(MouseEvent t) {
-            if (t.getButton().equals(MouseButton.SECONDARY) & !(t.isAltDown())) {
+            if (t.getButton().equals(MouseButton.SECONDARY) & !(t.isAltDown())) { // Toma de referencia de donde dibujar la linea.
                 int numComp = ejecutar.getListaImageViewComp().getPos(t.getSource());
                 Linea linea = new Linea();
                 linea.setCompA(numComp);
@@ -56,7 +60,7 @@ public class controller2 {
                 Label label = (Label) t.getSource(); //Se toma la compuerta sleccionada
                 ejecutar.eliminarCompuerta(label);
                 pane1.getChildren().remove(label); //Se elimina la imagen de la interfaz
-            }else {
+            }else { // permite comenzar el draga and drop.
                 orgSceneX = t.getSceneX();
                 orgSceneY = t.getSceneY();
                 orgTranslateX = ((Label) (t.getSource())).getTranslateX();
@@ -65,7 +69,10 @@ public class controller2 {
         }
     };
     EventHandler<MouseEvent> LabelOnMouseReleased = new EventHandler<MouseEvent>() {
-
+        /**
+         * Método encargado de atender todos los elementos relacionados al liberar el mouse de un label. Entre ellos están hacia donde se extiende la linea.
+         * @param t instancia derivada de la clase MouseEvent.
+         */
         @Override
         public void handle(MouseEvent t) {
             if (t.getButton().equals(MouseButton.SECONDARY) & !(t.isAltDown())) {
@@ -92,6 +99,10 @@ public class controller2 {
         }
     };
     EventHandler<MouseEvent> LabelOnMouseDraggedEventHandler = new EventHandler<MouseEvent>() {
+        /**
+         * Método encargado de atender todos los eventos relacionados al arrastre del label. Entre sus funciones están el fin del grag and drop.
+         * @param t instancia derivada de la clase MouseEvent.
+         */
         @Override
         public void handle(MouseEvent t) {
             if (t.getButton().equals(MouseButton.SECONDARY)){
