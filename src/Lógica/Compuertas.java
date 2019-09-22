@@ -18,6 +18,7 @@ public abstract class Compuertas {
     protected int numeroEntradas;
     protected double posX;
     protected double posY;
+    protected Lista listaEtiquetas;
     protected Lista<Circle> circulos;
     protected int circulosDisponibles; // circulo a donde va a terminar a la linea dibujada
 
@@ -33,6 +34,7 @@ public abstract class Compuertas {
         this.imagenes = new Lista<>();
         this.circulos= new Lista<>();
         this.circulosDisponibles = 1;
+        this.listaEtiquetas = new Lista();
     }
 
     /**
@@ -100,6 +102,14 @@ public abstract class Compuertas {
         entradas.modificarNodo(x,salida);
         salidas.reset();
         operar();
+    }
+
+    /**
+     * Método que me elimina todos los elementos de entradas.
+     */
+    public void resetEntradas(){
+        entradas = new Lista<>();
+        indice = 0;
     }
 
     /**
@@ -174,14 +184,15 @@ public abstract class Compuertas {
     public void setCirculosDisponibles(int circulosDisponibles) {
         this.circulosDisponibles = circulosDisponibles;
     }
-
-    /**
-     * Método que devuelve la lista de imágenes
-     * @return lista de imágenes
-     */
     public Lista getImagenes(){
         return this.imagenes;
     }
 
+    public Lista getListaEtiquetas() {
+        return listaEtiquetas;
+    }
 
+    public void setListaEtiquetas(Lista listaEtiquetas) {
+        this.listaEtiquetas = listaEtiquetas;
+    }
 }

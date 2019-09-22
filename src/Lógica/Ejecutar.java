@@ -20,6 +20,8 @@ public class Ejecutar {
     private Lista<ImageView> listaImageViewComp;
     private Lista<ImageView> listaImageViewInterr;
     private int numeroCompuertas;
+    private int numeroEntradas;
+    private int numeroSalidas;
 
 
     /**
@@ -32,6 +34,7 @@ public class Ejecutar {
         this.listaImageViewComp = new Lista<>();
         this.listaImageViewInterr = new Lista<>();
         this.numeroCompuertas = 0;
+        this.numeroEntradas = 0;
         this.lineasInterr = new Lista<>();
     }
 
@@ -60,9 +63,9 @@ public class Ejecutar {
         Interruptor select = (Interruptor) listaInterruptores.buscar(a).getDato();
         Compuertas B = (Compuertas) listaCompuertas.buscar(b).getDato();
         select.agregarObservador(B);
-        System.out.println(B.getIndice());
         B.setEntradas(select.isEstado());
         select.setEntradasDependientes(B.entradas.getLargo() -1);
+        numeroEntradas ++;
     }
 
     /**
@@ -75,7 +78,6 @@ public class Ejecutar {
             Compuertas B = (Compuertas) listaCompuertas.buscar(b).getDato();
             Compuertas A = (Compuertas) listaCompuertas.buscar(a).getDato();
             A.agregarObservador(B);
-            System.out.println(B.getIndice());
             B.setEntradas(A.getSalida(0));// arreglar el operar
             A.setEntradasDependientes(B.entradas.getLargo() - 1);
         }catch (Exception e){
@@ -110,6 +112,23 @@ public class Ejecutar {
             Compuertas comp = (Compuertas)listaCompuertas.buscar(indice).getDato();
             comp.operar();
             indice ++;
+        }
+        calcularSalidas();
+    }
+
+    /**
+     * Método encargado de calcular la canitdad de salidas sin asociar en un circuito.
+     */
+    private void calcularSalidas(){
+        Nodo temp = listaCompuertas.getHead();
+        while (temp!= null){
+            Compuertas comp = (Compuertas) temp.getDato();
+            if (comp.getEntradasDependientes().getLargo() == 0){
+                numeroSalidas ++;
+                temp = temp.getNext();
+            }else{
+                temp = temp.getNext();
+            }
         }
     }
 
@@ -248,6 +267,14 @@ public class Ejecutar {
         listaCompuertas.eliminar(numeroCompuerta);
         listaImageViewComp.eliminar(numeroCompuerta);
 
+    }
+
+    public int getNumeroSalidas() {
+        return numeroSalidas;
+    }
+
+    public int getNumeroEntradas() {
+        return numeroEntradas;
     }
 
     public static void main(String[] args) {

@@ -88,7 +88,6 @@ public class Controller {
                     double X = interruptor.getPosX();
                     double Y = interruptor.getPosY();
                     if ((t.getX()+X >= comp.getPosX() & t.getX()+X <= comp.getPosX()+167)& t.getY()+Y >= comp.getPosY() & t.getY()+Y <= comp.getPosY()+92){
-                        System.out.println(ejecución.getlista().getPos(comp));
                         temp.setCompB(ejecución.getlista().getPos(comp));
                         temp.dibujarLineaInterruptor();
                         break;
@@ -222,6 +221,20 @@ public class Controller {
      */
     public void initialize(){
         this.pane1 = pane;
+    }
+    @FXML
+    private void Tabla(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("Tabla.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Tabla de verdad");
+            stage.show();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @FXML

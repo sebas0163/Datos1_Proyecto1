@@ -21,7 +21,7 @@
             </StackPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="989.0" prefWidth="258.0">
                <children>
-                  <SplitPane dividerPositions="0.8324924318869829" orientation="VERTICAL" prefHeight="989.0" prefWidth="230.0">
+                  <SplitPane dividerPositions="0.8151073309031996" orientation="VERTICAL" prefHeight="989.0" prefWidth="230.0">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="327.0" prefWidth="222.0">
                            <children>
@@ -99,6 +99,7 @@
                               <Button fx:id="bton1" layoutX="32.0" layoutY="14.0" mnemonicParsing="false" onAction="#probar" prefHeight="26.0" prefWidth="94.0" text="Probar" />
                               <Button layoutX="32.0" layoutY="58.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Guardar" />
                               <Button layoutX="32.0" layoutY="102.0" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="94.0" text="Limpiar" />
+                              <Button layoutX="32.0" layoutY="146.0" mnemonicParsing="false" onAction="#Tabla" prefHeight="26.0" prefWidth="94.0" text="Tabla" />
                            </children></AnchorPane>
                     </items>
                   </SplitPane>
