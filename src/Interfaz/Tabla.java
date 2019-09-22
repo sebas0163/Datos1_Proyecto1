@@ -1,26 +1,31 @@
 package Interfaz;
 
 import Lógica.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import static Interfaz.Controller.ejecución;
 
 public class Tabla {
     @FXML
-    private TableView tabla;
+    private TableView<Lista> tabla;
     private Lista<Boolean> listaValores;
     private Lista<TableColumn> listaColumnas;
     private Ejecutar ejecutar;
     private double iteraciones;
     private Lista<Compuertas> listaCompuertas;
+    private ObservableList<Lista> tablaVerdad;
 
     /**
      * Método que inicializa los atributos de la interfaz.
      */
     public void initialize() {
         this.ejecutar = ejecución;
+        this.tablaVerdad = FXCollections.observableArrayList();
         this.listaValores = new Lista<>();
         this.listaColumnas = new Lista<>();
         this.listaCompuertas = new Lista<>();
@@ -28,28 +33,49 @@ public class Tabla {
         setValores();
         añadirColumna();
         tomarCompuertas();
-        //calcularTabla();
+        calcularTabla();
     }
 
     /**
      * Método que calcula la tabla de verdad y los añade a las columnas.
      */
-    /*private void calcularTabla() {
+    private void calcularTabla() {
         Nodo temp = listaCompuertas.getHead();
-        int indice =1;
+        int indice =0;
         while (indice != iteraciones){
+            Lista<Boolean> fila = new Lista<>();
             cambiarElementos(indice);
             int pos = 0;
             while (temp != null){
                 Compuertas comp = (Compuertas) temp.getDato();
                 comp.setEntradas((boolean)listaValores.buscar(pos).getDato());
+                fila.add((boolean)listaValores.buscar(pos).getDato());
                 pos ++;
                 temp = temp.getNext();
             }
+            temp = listaCompuertas.getHead();
+            operarEntradas();
+            fila = ejecutar.salidas(fila);
             indice++;
+            /*Nodo temp2 = fila.getHead();
+            while (temp2 != null){
+                System.out.println((boolean)temp2.getDato());
+                temp2 = temp2.getNext();
+            }
+            System.out.println("__________________________");*/
+            tablaVerdad.add(fila);
         }
-
-    }*/
+        añadirTabla();
+    }
+    private void añadirTabla(){
+        Nodo temp = listaColumnas.getHead();
+        while (temp != null){
+            TableColumn column = (TableColumn) temp.getDato();
+            column.setCellValueFactory(new PropertyValueFactory<Lista,Boolean>("head"));
+            temp = temp.getNext();
+        }
+        tabla.setItems(tablaVerdad);
+    }
 
     /**
      * Método que añade valores true a la lista de valores, según la cantidad de entradas de la compuerta
@@ -59,23 +85,45 @@ public class Tabla {
             listaValores.add(true);
         }
     }
+
+    /**
+     * Método que va cambiando los elemntos de la lista de valores cada tanto de iteraciones, según la tabla de verdad.
+     * @param indice
+     */
      private void cambiarElementos(int indice){
          double exponente = iteraciones /2 ;
-         int n = 0; // posición de la lista.
-         while(n != listaValores.getLargo()){
-             if (indice == exponente){
-                 listaValores.modificarNodo(0,false);
-             }
-             exponente = exponente / 2;
-             if (indice % exponente == 0){
-                 if ((boolean)listaValores.buscar(n).getDato()){
-                     listaValores.modificarNodo(n,false);
-                 }else{
-                     listaValores.modificarNodo(n,true);
+         int n = 1; // posición de la lista.
+         if (indice == 0){
+             return;
+         }else {
+             while (n != listaValores.getLargo()) {
+                 if (indice == exponente) {
+                     listaValores.modificarNodo(0, false);
                  }
+                 exponente = exponente / 2;
+                 if (indice % exponente == 0) {
+                     if ((boolean) listaValores.buscar(n).getDato()) {
+                         listaValores.modificarNodo(n, false);
+                     } else {
+                         listaValores.modificarNodo(n, true);
+                     }
+                 }
+                 n++;
+                 exponente = iteraciones/2;
              }
-             n ++;
          }
+     }
+
+    /**
+     * Método que permite operar el circuito de nuevo sin tomar en cuenta los interruptores.
+     */
+    private void operarEntradas(){
+        Nodo temp = listaCompuertas.getHead();
+        while (temp != null){
+            Compuertas comp = (Compuertas) temp.getDato();
+            comp.operar();
+            temp = temp.getNext();
+        }
      }
 
     /**
@@ -84,15 +132,14 @@ public class Tabla {
     private void añadirColumna(){
         int indice = 0;
         while (indice != ejecutar.getNumeroEntradas()){
-            TableColumn column = new TableColumn("entrada");
-            column.setCellValueFactory();
+            TableColumn column = new TableColumn<Nodo,Boolean>("entrada");
             listaColumnas.add(column);
             tabla.getColumns().add(column);
             indice ++;
         }
         indice = 0;
         while(indice != ejecutar.getNumeroSalidas()){
-            TableColumn column = new TableColumn("Salida");
+            TableColumn column = new TableColumn<Nodo,Boolean>("Salida");
             listaColumnas.add(column);
             tabla.getColumns().add(column);
             indice ++;

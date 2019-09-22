@@ -133,6 +133,23 @@ public class Ejecutar {
     }
 
     /**
+     * Método que busca las compuertas que tienen las salidas sin asociar y tomas sus salidas.
+     * @return Lista con las salidas del nuevo circuto.
+     */
+    public Lista salidas(Lista fila){
+        Nodo temp = listaCompuertas.getHead();
+        while (temp != null){
+            Compuertas comp = (Compuertas) temp.getDato();
+            if (comp.getEntradasDependientes().getLargo() == 0){
+                fila.add(comp.getSalida(0));
+                temp = temp.getNext();
+            }else{
+                temp = temp.getNext();
+            }
+        }
+        return fila;
+    }
+    /**
      * Método encargado de añadir una linea a la lista de lineas.
      * @param l dato de tipo linea, que contiene a la linea dibujada.
      */
