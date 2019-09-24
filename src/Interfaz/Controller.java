@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
@@ -24,6 +25,8 @@ import static Interfaz.controller2.compuerta;
 public class Controller {
     @FXML
     private Pane pane;
+    @FXML
+    private VBox vBox;
     public static Pane pane1;
     public static Ejecutar ejecución = new Ejecutar();
     private double orgSceneX;
@@ -118,8 +121,8 @@ public class Controller {
                 ((Label) ejecución.getListaImageViewInterr().buscar(numInter).getDato()).setTranslateX(newTranslateX);
                 ((Label) ejecución.getListaImageViewInterr().buscar(numInter).getDato()).setTranslateY(newTranslateY);
                 Interruptor interruptor= (Interruptor) ejecución.getInter().buscar(numInter).getDato();
-                interruptor.getCircle().setCenterX(newTranslateX + 147);
-                interruptor.getCircle().setCenterY(newTranslateY+77);
+                interruptor.getCircle().setCenterX(newTranslateX + 16);
+                interruptor.getCircle().setCenterY(newTranslateY+87);
                 interruptor.setPosX(newTranslateX);
                 interruptor.setPosY(newTranslateY);
             }
@@ -179,6 +182,25 @@ public class Controller {
             }
         }
     };
+    EventHandler<MouseEvent> clickNuevaCompuerta = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+            ejecución.añadirCompuerta((NuevaCompuerta)ejecución.getCompuertasNuevas().buscar(0).getDato());
+            Compuertas comp = (Compuertas) ejecución.getlista().buscar(ejecución.getNuemeroCompuertas()-1).getDato();
+            Image im = (Image)comp.getImagenes().buscar(0).getDato();
+            Circle circle = new Circle(0,45,5);
+            Circle circle1 = new Circle(160,45,5);
+            comp.getCirculos().add(circle1);
+            comp.getCirculos().add(circle);
+            Label label = new Label();
+            label.setGraphic(new ImageView(im));
+            label.setOnMousePressed(LabelOnMousePressedEventHandler);
+            label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
+            label.setOnMouseReleased(LabelOnMouseReleased);
+            ejecución.getListaImageViewComp().add(label);
+            pane1.getChildren().addAll(label,circle,circle1);
+        }
+    };
     EventHandler<MouseEvent> LabelOnMouseDraggedEventHandler = new EventHandler<MouseEvent>() {
         /**
          * Método encargado de atender todos los eventos relacionados al arrastre del label. Entre sus funciones están el fin del grag and drop.
@@ -234,6 +256,23 @@ public class Controller {
             stage.show();
         } catch (Exception e) {
             System.out.println(e);
+        }
+    }
+    @FXML
+    private void guardar(){
+        try {
+            ejecución.añadirNuevaCompuerta(new NuevaCompuerta(ejecución.getTablaVerdad(),ejecución.getNumeroEntradas(),ejecución.getNumeroSalidas()));
+            pane.getChildren().clear();
+            ejecución.nuevaHoja();
+            Image im = new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\nueva.png");
+            ImageView view = new ImageView(im);
+            view.setOnMouseClicked(clickNuevaCompuerta);
+            view.setFitHeight(65);
+            view.setFitWidth(110);
+            vBox.getChildren().add(view);
+
+        }catch (Exception e){
+            System.out.println("No se ha calculado la tabla de verdad");
         }
     }
 
@@ -400,7 +439,7 @@ public class Controller {
         Interruptor interr = (Interruptor)ejecución.getInter().buscar(ejecución.getInter().getLargo()-1).getDato();
         Image im = (Image) interr.getImage().buscar(1).getDato();
         Label label = new Label();
-        Circle circle = new Circle(147,77,5);
+        Circle circle = new Circle(16,87,5);
         interr.setCircle(circle);
         label.setGraphic(new ImageView(im));
         label.setOnMousePressed(interruptorOnMousePressed);
@@ -417,5 +456,6 @@ public class Controller {
     private void reset(){
         ejecución = new Ejecutar();
         pane.getChildren().clear();
+
     }
 }

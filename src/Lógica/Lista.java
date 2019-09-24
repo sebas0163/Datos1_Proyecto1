@@ -116,6 +116,7 @@ public class Lista<T> {
      */
     public void reset(){
         this.head = null;
+        largo = 0;
     }
 
     /**

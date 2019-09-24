@@ -30,6 +30,7 @@ public class Compuerta_AND extends Compuertas{
     @Override
     public void operar(){
         if(indice == numeroEntradas){
+            salidas.reset();
             if(entradas.verificar(false)){
                 salidas.add(false);
             }else{

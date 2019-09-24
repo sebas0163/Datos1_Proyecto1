@@ -19,6 +19,7 @@ public class Tabla {
     private double iteraciones;
     private Lista<Compuertas> listaCompuertas;
     private ObservableList<Lista> tablaVerdad;
+    private Lista<Lista> calculoVerdad;
 
     /**
      * Método que inicializa los atributos de la interfaz.
@@ -29,6 +30,7 @@ public class Tabla {
         this.listaValores = new Lista<>();
         this.listaColumnas = new Lista<>();
         this.listaCompuertas = new Lista<>();
+        this.calculoVerdad = new Lista<>();
         this.iteraciones = Math.pow(2, ejecutar.getNumeroEntradas());
         setValores();
         añadirColumna();
@@ -46,8 +48,12 @@ public class Tabla {
             Lista<Boolean> fila = new Lista<>();
             cambiarElementos(indice);
             int pos = 0;
+            Compuertas comp = (Compuertas) temp.getDato();
+            comp.getEntradas().reset();
+            comp.setIndice(0);
+            comp.getSalidas().reset();
             while (temp != null){
-                Compuertas comp = (Compuertas) temp.getDato();
+                comp = (Compuertas) temp.getDato();
                 comp.setEntradas((boolean)listaValores.buscar(pos).getDato());
                 fila.add((boolean)listaValores.buscar(pos).getDato());
                 pos ++;
@@ -57,14 +63,16 @@ public class Tabla {
             operarEntradas();
             fila = ejecutar.salidas(fila);
             indice++;
-            /*Nodo temp2 = fila.getHead();
+            Nodo temp2 = fila.getHead();
             while (temp2 != null){
                 System.out.println((boolean)temp2.getDato());
                 temp2 = temp2.getNext();
             }
-            System.out.println("__________________________");*/
+            System.out.println("__________________________");
+            calculoVerdad.add(fila);
             tablaVerdad.add(fila);
         }
+        ejecutar.setTablaVerdad(calculoVerdad);
         añadirTabla();
     }
     private void añadirTabla(){
@@ -96,10 +104,10 @@ public class Tabla {
          if (indice == 0){
              return;
          }else {
+             if (indice == exponente) {
+                 listaValores.modificarNodo(0, false);
+             }
              while (n != listaValores.getLargo()) {
-                 if (indice == exponente) {
-                     listaValores.modificarNodo(0, false);
-                 }
                  exponente = exponente / 2;
                  if (indice % exponente == 0) {
                      if ((boolean) listaValores.buscar(n).getDato()) {
@@ -109,7 +117,6 @@ public class Tabla {
                      }
                  }
                  n++;
-                 exponente = iteraciones/2;
              }
          }
      }

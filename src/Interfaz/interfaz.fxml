@@ -25,7 +25,7 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="327.0" prefWidth="222.0">
                            <children>
-                              <VBox layoutY="-3.0" prefHeight="827.0" prefWidth="166.0" style="-fx-background-color: #0f273b;">
+                              <VBox fx:id="vBox" layoutY="-3.0" prefHeight="827.0" prefWidth="166.0" style="-fx-background-color: #0f273b;">
                                  <children>
                                     <ImageView fx:id="comp1" fitHeight="65.0" fitWidth="110.0" onMouseClicked="#pressAND" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -87,7 +87,7 @@
                                           <Image url="@Imagenes/Interruptor2.png" />
                                        </image>
                                        <VBox.margin>
-                                          <Insets left="25.0" top="10.0" />
+                                          <Insets left="60.0" top="20.0" />
                                        </VBox.margin>
                                     </ImageView>
                                  </children>
@@ -97,7 +97,7 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #0f273b;">
                            <children>
                               <Button fx:id="bton1" layoutX="32.0" layoutY="14.0" mnemonicParsing="false" onAction="#probar" prefHeight="26.0" prefWidth="94.0" text="Probar" />
-                              <Button layoutX="32.0" layoutY="58.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Guardar" />
+                              <Button layoutX="32.0" layoutY="58.0" mnemonicParsing="false" onAction="#guardar" prefHeight="26.0" prefWidth="94.0" text="Guardar" />
                               <Button layoutX="32.0" layoutY="102.0" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="94.0" text="Limpiar" />
                               <Button layoutX="32.0" layoutY="146.0" mnemonicParsing="false" onAction="#Tabla" prefHeight="26.0" prefWidth="94.0" text="Tabla" />
                            </children></AnchorPane>

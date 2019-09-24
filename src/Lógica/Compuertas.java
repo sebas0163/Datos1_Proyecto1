@@ -181,6 +181,10 @@ public abstract class Compuertas {
         return circulosDisponibles;
     }
 
+    public Lista<Boolean> getSalidas() {
+        return salidas;
+    }
+
     public void setCirculosDisponibles(int circulosDisponibles) {
         this.circulosDisponibles = circulosDisponibles;
     }
