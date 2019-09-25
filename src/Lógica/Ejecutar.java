@@ -1,6 +1,7 @@
 package Lógica;
 
 import Interfaz.Linea;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
@@ -150,6 +151,20 @@ public class Ejecutar {
     public Lista salidas(Lista fila) {
         Nodo temp = listaCompuertas.getHead();
         Lista filaAux = fila;
+        while (temp != null) {
+            Compuertas comp = (Compuertas) temp.getDato();
+            if (comp.getEntradasDependientes().getLargo() == 0) {
+                filaAux.add(comp.getSalida(0));
+                temp = temp.getNext();
+            } else {
+                temp = temp.getNext();
+            }
+        }
+        return filaAux;
+    }
+    public ObservableList salidas2(ObservableList lista) {
+        Nodo temp = listaCompuertas.getHead();
+        ObservableList filaAux = lista;
         while (temp != null) {
             Compuertas comp = (Compuertas) temp.getDato();
             if (comp.getEntradasDependientes().getLargo() == 0) {
