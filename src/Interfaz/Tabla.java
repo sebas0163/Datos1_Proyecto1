@@ -1,12 +1,15 @@
 package Interfaz;
 
 import Lógica.*;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import javax.script.SimpleBindings;
 
 import static Interfaz.Controller.ejecución;
 
@@ -77,10 +80,13 @@ public class Tabla {
     }
     private void añadirTabla(){
         Nodo temp = listaColumnas.getHead();
+        int a = 0;
         while (temp != null){
-            TableColumn column = (TableColumn) temp.getDato();
-            column.setCellValueFactory(new PropertyValueFactory<Lista,Boolean>("head"));
+            int contador = a;
+            TableColumn<Lista,Boolean> column = (TableColumn) temp.getDato();
+            column.setCellValueFactory(valores -> new SimpleBooleanProperty((boolean)valores.getValue().buscar(contador).getDato()));
             temp = temp.getNext();
+            a++;
         }
         tabla.setItems(tablaVerdad);
     }
@@ -139,14 +145,14 @@ public class Tabla {
     private void añadirColumna(){
         int indice = 0;
         while (indice != ejecutar.getNumeroEntradas()){
-            TableColumn column = new TableColumn<Nodo,Boolean>("entrada");
+            TableColumn column = new TableColumn<Lista,Boolean>("entrada");
             listaColumnas.add(column);
             tabla.getColumns().add(column);
             indice ++;
         }
         indice = 0;
         while(indice != ejecutar.getNumeroSalidas()){
-            TableColumn column = new TableColumn<Nodo,Boolean>("Salida");
+            TableColumn column = new TableColumn<Lista,Boolean>("Salida");
             listaColumnas.add(column);
             tabla.getColumns().add(column);
             indice ++;
