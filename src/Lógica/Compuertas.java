@@ -1,5 +1,6 @@
 package Lógica;
 
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Circle;
 
@@ -8,7 +9,6 @@ import javafx.scene.shape.Circle;
  * @author Sebastián Moya
  */
 public abstract class Compuertas {
-    protected Interruptor interruptor;
     protected Lista<Boolean> salidas;
     protected Lista<Boolean> entradas;
     protected Lista<Compuertas> observadores;
@@ -18,7 +18,7 @@ public abstract class Compuertas {
     protected int numeroEntradas;
     protected double posX;
     protected double posY;
-    protected Lista listaEtiquetas;
+    protected Lista<Label> listaEtiquetas;
     protected Lista<Circle> circulos;
     protected int circulosDisponibles; // circulo a donde va a terminar a la linea dibujada
 
@@ -34,7 +34,7 @@ public abstract class Compuertas {
         this.imagenes = new Lista<>();
         this.circulos= new Lista<>();
         this.circulosDisponibles = 1;
-        this.listaEtiquetas = new Lista();
+        this.listaEtiquetas = new Lista<>();
     }
 
     /**
@@ -59,18 +59,6 @@ public abstract class Compuertas {
             index ++;
         }
     }
-    protected void notificarEliminar(){
-        Nodo temp = observadores.getHead();
-        int index = 0;
-        while(temp != null){
-            Compuertas comp = (Compuertas) temp.getDato();
-            int pos = (int) entradasDependientes.buscar(index).getDato();
-            comp.eliminarEntrada(pos);
-            temp = temp.getNext();
-            index ++;
-        }
-    }
-
     /**
      * Método que incerta la cantidad de entradas dependientes de una salida.
      * @param pos numero de entradas dependientes.
@@ -88,6 +76,8 @@ public abstract class Compuertas {
             System.out.println("entradas completas");
         }else{
             entradas.add(entrada);
+            Label label = (Label) listaEtiquetas.buscar(entradas.getLargo()-1).getDato();
+            label.setText("i<"+entrada+">");
             indice ++;
             if(indice == numeroEntradas){ operar();}
         }
@@ -100,6 +90,8 @@ public abstract class Compuertas {
      */
     public void actualizar(int x,boolean salida){
         entradas.modificarNodo(x,salida);
+        Label label = (Label) listaEtiquetas.buscar(x).getDato();
+        label.setText("i<"+salida+">");
         salidas.reset();
         operar();
     }
@@ -118,16 +110,6 @@ public abstract class Compuertas {
     public abstract void operar();
     public void mostrar(){
         System.out.println(salidas.buscar(0).getDato());
-    }
-
-    /**
-     * Método encargado de eliminar una entrda en específico.
-     * @param numeroEntrada entrada que se desea eliminar
-     */
-    public void eliminarEntrada(int numeroEntrada){
-        entradas.eliminar(numeroEntrada);
-        indice --;
-        salidas = new Lista<>();
     }
 
     /**

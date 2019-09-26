@@ -7,10 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-
-import javax.script.SimpleBindings;
-
 import static Interfaz.Controller.ejecución;
 
 public class Tabla {
@@ -66,18 +62,16 @@ public class Tabla {
             operarEntradas();
             fila = ejecutar.salidas(fila);
             indice++;
-            Nodo temp2 = fila.getHead();
-            while (temp2 != null){
-                System.out.println((boolean)temp2.getDato());
-                temp2 = temp2.getNext();
-            }
-            System.out.println("__________________________");
             calculoVerdad.add(fila);
             tablaVerdad.add(fila);
         }
         ejecutar.setTablaVerdad(calculoVerdad);
         añadirTabla();
     }
+
+    /**
+     * Método encargado de añadir la matriz que contiene el calculo de la tabla a la tabla de interfaz.
+     */
     private void añadirTabla(){
         Nodo temp = listaColumnas.getHead();
         int a = 0;

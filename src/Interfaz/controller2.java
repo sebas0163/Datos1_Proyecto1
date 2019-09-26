@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import static Interfaz.Controller.*;
@@ -166,6 +167,56 @@ public class controller2 {
                     temp = temp.getNext();
                     indice++;
                 }
+                Nodo temp2 = comp.getListaEtiquetas().getHead();
+                indice = 0;
+                while (temp2 != null){
+                    Label label = (Label) temp2.getDato();
+                    if (comp.getListaEtiquetas().getLargo() == 3){
+                        if (indice == 0){
+                            label.setLayoutX(newTranslateX+16);
+                            label.setLayoutY(newTranslateY+11);
+                        }else if (indice == 1){
+                            label.setLayoutY(newTranslateY+11+37);
+                            label.setLayoutX(newTranslateX + 16);
+                        }else{
+                            label.setLayoutX(newTranslateX+123);
+                            label.setLayoutY(newTranslateY+30);
+                        }
+                    }else if(comp.getListaEtiquetas().getLargo() == 4){
+                        if (indice == 0){
+                            label.setLayoutX(newTranslateX+16);
+                            label.setLayoutY(newTranslateY+13);
+                        }else if (indice == 1){
+                            label.setLayoutY(newTranslateY+13+18);
+                            label.setLayoutX(newTranslateX + 16);
+                        }else if (indice == 2){
+                            label.setLayoutY(newTranslateY+13+18+18);
+                            label.setLayoutX(newTranslateX + 16);
+                        }else{
+                            label.setLayoutY(newTranslateY+30);
+                            label.setLayoutX(newTranslateX + 123);
+                        }
+                    }else{
+                        if (indice == 0){
+                            label.setLayoutX(newTranslateX+16);
+                            label.setLayoutY(newTranslateY+1);
+                        }else if (indice == 1){
+                            label.setLayoutY(newTranslateY+1+18);
+                            label.setLayoutX(newTranslateX + 16);
+                        }else if (indice == 2){
+                            label.setLayoutY(newTranslateY+1+18+18);
+                            label.setLayoutX(newTranslateX + 16);
+                        }else if (indice == 3){
+                            label.setLayoutY(newTranslateY+1+18+18+18);
+                            label.setLayoutX(newTranslateX + 16);
+                        }else{
+                            label.setLayoutX(newTranslateX + 123);
+                            label.setLayoutY(newTranslateY + 30);
+                        }
+                    }
+                    temp2 = temp2.getNext();
+                    indice ++;
+                }
                 comp.setPosX(newTranslateX);
                 comp.setPosY(newTranslateY);
             }
@@ -206,30 +257,54 @@ public class controller2 {
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
                     Label label = new Label();
+                    int posX = 16;
+                    int posY = 11;
+                    for (int cont =1; cont<3; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 37;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(30);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,27,5);
                     Circle circle1 = new Circle(10,65,5);
                     Circle circle2 = new Circle(160,45,5);
                     comp.getCirculos().add(circle2);
                     comp.getCirculos().add(circle);
                     comp.getCirculos().add(circle1);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,label2);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_AND(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
+                    int posX = 16;
+                    int posY = 13;
+                    for (int cont =1; cont<4; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 18;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(30);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,28,5);
                     Circle circle1 = new Circle(10,47,5);
                     Circle circle2 = new Circle(10,65,5);
@@ -238,25 +313,33 @@ public class controller2 {
                     comp.getCirculos().add(circle);
                     comp.getCirculos().add(circle1);
                     comp.getCirculos().add(circle2);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,label2);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_AND(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
+                    int posX = 16;
+                    int posY = 1;
+                    for (int cont =1; cont<5; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 18;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(30);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,18,5);
                     Circle circle1 = new Circle(10,33,5);
                     Circle circle2 = new Circle(10,53,5);
@@ -267,21 +350,13 @@ public class controller2 {
                     comp.getCirculos().add(circle1);
                     comp.getCirculos().add(circle2);
                     comp.getCirculos().add(circle3);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,circle4);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,circle4,label2);
                 }
                 break;
             case 2:
@@ -289,31 +364,55 @@ public class controller2 {
                     ejecutar.añadirCompuerta(new Compuerta_OR(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
+                    int posX = 10;
+                    int posY = 11;
+                    for (int cont =1; cont<3; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 37;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(30);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,27,5);
                     Circle circle1 = new Circle(10,65,5);
                     Circle circle2 = new Circle(160,45,5);
                     comp.getCirculos().add(circle2);
                     comp.getCirculos().add(circle);
                     comp.getCirculos().add(circle1);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,label2);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_OR(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
+                    int posX = 10;
+                    int posY = 13;
+                    for (int cont =1; cont<4; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 18;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(30);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,28,5);
                     Circle circle1 = new Circle(10,47,5);
                     Circle circle2 = new Circle(10,65,5);
@@ -322,25 +421,33 @@ public class controller2 {
                     comp.getCirculos().add(circle);
                     comp.getCirculos().add(circle1);
                     comp.getCirculos().add(circle2);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,label2);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_OR(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
+                    int posX = 10;
+                    int posY = 1;
+                    for (int cont =1; cont<5; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 18;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(30);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,18,5);
                     Circle circle1 = new Circle(10,33,5);
                     Circle circle2 = new Circle(10,53,5);
@@ -351,21 +458,13 @@ public class controller2 {
                     comp.getCirculos().add(circle1);
                     comp.getCirculos().add(circle2);
                     comp.getCirculos().add(circle3);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,circle4);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,circle4,label2);
                 }
                 break;
             case 3:
@@ -373,31 +472,55 @@ public class controller2 {
                     ejecutar.añadirCompuerta(new Compuerta_NAND(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
+                    int posX = 14;
+                    int posY = 11;
+                    for (int cont =1; cont<3; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 37;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(26);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,27,5);
                     Circle circle1 = new Circle(10,65,5);
                     Circle circle2 = new Circle(160,45,5);
                     comp.getCirculos().add(circle2);
                     comp.getCirculos().add(circle);
                     comp.getCirculos().add(circle1);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,label2);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_NAND(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
+                    int posX = 14;
+                    int posY = 13;
+                    for (int cont =1; cont<4; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 18;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(26);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,28,5);
                     Circle circle1 = new Circle(10,47,5);
                     Circle circle2 = new Circle(10,65,5);
@@ -406,25 +529,33 @@ public class controller2 {
                     comp.getCirculos().add(circle);
                     comp.getCirculos().add(circle1);
                     comp.getCirculos().add(circle2);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,label2);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_NAND(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
+                    int posX = 14;
+                    int posY = 1;
+                    for (int cont =1; cont<5; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 18;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(26);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,18,5);
                     Circle circle1 = new Circle(10,33,5);
                     Circle circle2 = new Circle(10,53,5);
@@ -435,21 +566,13 @@ public class controller2 {
                     comp.getCirculos().add(circle1);
                     comp.getCirculos().add(circle2);
                     comp.getCirculos().add(circle3);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,circle4);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,circle4,label2);
                 }
                 break;
             case 4:
@@ -457,31 +580,55 @@ public class controller2 {
                     ejecutar.añadirCompuerta(new Compuerta_NOR(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
+                    int posX = 14;
+                    int posY = 11;
+                    for (int cont =1; cont<3; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 37;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(26);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,27,5);
                     Circle circle1 = new Circle(10,65,5);
                     Circle circle2 = new Circle(160,45,5);
                     comp.getCirculos().add(circle2);
                     comp.getCirculos().add(circle);
                     comp.getCirculos().add(circle1);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,label2);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_NOR(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
+                    int posX = 14;
+                    int posY = 13;
+                    for (int cont =1; cont<4; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 18;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(26);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,28,5);
                     Circle circle1 = new Circle(10,47,5);
                     Circle circle2 = new Circle(10,65,5);
@@ -490,25 +637,33 @@ public class controller2 {
                     comp.getCirculos().add(circle);
                     comp.getCirculos().add(circle1);
                     comp.getCirculos().add(circle2);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,label2);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_NOR(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
+                    int posX = 14;
+                    int posY = 1;
+                    for (int cont =1; cont<5; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 18;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(26);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,18,5);
                     Circle circle1 = new Circle(10,33,5);
                     Circle circle2 = new Circle(10,53,5);
@@ -519,21 +674,13 @@ public class controller2 {
                     comp.getCirculos().add(circle1);
                     comp.getCirculos().add(circle2);
                     comp.getCirculos().add(circle3);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,circle4);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,circle4,label2);
                 }
                 break;
             case 5:
@@ -541,31 +688,55 @@ public class controller2 {
                     ejecutar.añadirCompuerta(new Compuerta_XOR(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
+                    int posX = 5;
+                    int posY = 7;
+                    for (int cont =1; cont<3; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 37;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(26);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,27,5);
                     Circle circle1 = new Circle(10,65,5);
                     Circle circle2 = new Circle(160,45,5);
                     comp.getCirculos().add(circle2);
                     comp.getCirculos().add(circle);
                     comp.getCirculos().add(circle1);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,label2);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_XOR(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
+                    int posX = 5;
+                    int posY = 9;
+                    for (int cont =1; cont<4; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 18;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(26);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,28,5);
                     Circle circle1 = new Circle(10,47,5);
                     Circle circle2 = new Circle(10,65,5);
@@ -574,25 +745,33 @@ public class controller2 {
                     comp.getCirculos().add(circle);
                     comp.getCirculos().add(circle1);
                     comp.getCirculos().add(circle2);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,label2);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_XOR(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
+                    int posX = 5;
+                    int posY = 0;
+                    for (int cont =1; cont<5; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 18;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(26);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,18,5);
                     Circle circle1 = new Circle(10,33,5);
                     Circle circle2 = new Circle(10,53,5);
@@ -603,21 +782,13 @@ public class controller2 {
                     comp.getCirculos().add(circle1);
                     comp.getCirculos().add(circle2);
                     comp.getCirculos().add(circle3);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,circle4);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,circle4,label2);
                 }
                 break;
             case 6:
@@ -625,31 +796,55 @@ public class controller2 {
                     ejecutar.añadirCompuerta(new Compuerta_NXOR(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
+                    int posX = 5;
+                    int posY = 7;
+                    for (int cont =1; cont<3; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 37;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(26);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,27,5);
                     Circle circle1 = new Circle(10,65,5);
                     Circle circle2 = new Circle(160,45,5);
                     comp.getCirculos().add(circle2);
                     comp.getCirculos().add(circle);
                     comp.getCirculos().add(circle1);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,label2);
                 } else if (num == 3) {
                     ejecutar.añadirCompuerta(new Compuerta_NXOR(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
+                    int posX = 5;
+                    int posY = 9;
+                    for (int cont =1; cont<4; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 18;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(26);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,28,5);
                     Circle circle1 = new Circle(10,47,5);
                     Circle circle2 = new Circle(10,65,5);
@@ -658,25 +853,33 @@ public class controller2 {
                     comp.getCirculos().add(circle);
                     comp.getCirculos().add(circle1);
                     comp.getCirculos().add(circle2);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,label2);
                 } else {
                     ejecutar.añadirCompuerta(new Compuerta_NXOR(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
+                    int posX = 5;
+                    int posY = 0;
+                    for (int cont =1; cont<5; cont++){
+                        Label label2 = new Label("i<Null>");
+                        label2.setLayoutY(posY);
+                        label2.setLayoutX(posX);
+                        label2.setFont(new Font("Arial",12));
+                        posY += 18;
+                        comp.getListaEtiquetas().add(label2);
+                        pane1.getChildren().add(label2);
+                    }
+                    Label label2 = new Label("o<Null>");
+                    label2.setLayoutY(26);
+                    label2.setLayoutX(123);
+                    label2.setFont(new Font("Arial",12));
+                    comp.getListaEtiquetas().add(label2);
                     Circle circle = new Circle(10,18,5);
                     Circle circle1 = new Circle(10,33,5);
                     Circle circle2 = new Circle(10,53,5);
@@ -687,21 +890,13 @@ public class controller2 {
                     comp.getCirculos().add(circle1);
                     comp.getCirculos().add(circle2);
                     comp.getCirculos().add(circle3);
-                    Nodo temp = comp.getCirculos().getHead();
-                    while (temp != null){
-                        Circle circulo = (Circle) temp.getDato();
-                        circulo.setOnMousePressed(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseDragged(LabelOnMousePressedEventHandler);
-                        circulo.setOnMouseReleased(LabelOnMouseReleased);
-                        temp = temp.getNext();
-                    }
                     Label label = new Label();
                     label.setGraphic(new ImageView(im));
                     label.setOnMousePressed(LabelOnMousePressedEventHandler);
                     label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
                     label.setOnMouseReleased(LabelOnMouseReleased);
                     ejecutar.getListaImageViewComp().add(label);
-                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,circle4);
+                    pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,circle4,label2);
                 }
                 break;
         }

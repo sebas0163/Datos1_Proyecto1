@@ -1,6 +1,8 @@
 package Lógica;
 
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+
 
 /**
  * Clase encargada del funcionamiento de la compuerta lógica NOT.
@@ -30,8 +32,12 @@ public class Compuerta_NOT extends Compuertas {
     public void operar() {
         if (indice == numeroEntradas){
             if(entradas.verificar(true)){
+                Label label = (Label) listaEtiquetas.buscar(1).getDato();
+                label.setText("o<false>");
                 salidas.add(false);
             }else{
+                Label label = (Label)listaEtiquetas.buscar(1).getDato();
+                label.setText("o<true>");
                 salidas.add(true);
             }
         }else{

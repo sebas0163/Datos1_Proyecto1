@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import static Interfaz.controller2.compuerta;
@@ -233,6 +234,20 @@ public class Controller {
                     temp = temp.getNext();
                     indice ++;
                 }
+                indice = 0;
+                Nodo temp2 = comp.getListaEtiquetas().getHead();
+                while (temp2 != null){
+                    Label label = (Label) temp2.getDato();
+                    if (indice == 0){
+                        label.setLayoutY(newTranslateY+32);
+                        label.setLayoutX(newTranslateX+4);
+                    }else{
+                        label.setLayoutX(newTranslateX+126);
+                        label.setLayoutY(newTranslateY+32);
+                    }
+                    temp2 = temp2.getNext();
+                    indice ++;
+                }
                 comp.setPosX(newTranslateX);
                 comp.setPosY(newTranslateY);
             }
@@ -417,6 +432,16 @@ public class Controller {
         ejecución.añadirCompuerta(new Compuerta_NOT());
         Compuertas comp = (Compuertas) ejecución.getlista().buscar(ejecución.getNuemeroCompuertas()-1).getDato();
         Image im = (Image)comp.getImagenes().buscar(0).getDato();
+        Label label2 = new Label("i<null>");
+        Label label3 = new Label("o<null>");
+        label2.setFont(new Font("Arial",12));
+        label3.setFont(new Font("Arial",12));
+        label2.setLayoutX(4);
+        label2.setLayoutY(32);
+        label3.setLayoutX(126);
+        label3.setLayoutY(32);
+        comp.getListaEtiquetas().add(label2);
+        comp.getListaEtiquetas().add(label3);
         Circle circle = new Circle(0,45,5);
         Circle circle1 = new Circle(160,45,5);
         comp.getCirculos().add(circle1);
@@ -427,7 +452,7 @@ public class Controller {
         label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
         label.setOnMouseReleased(LabelOnMouseReleased);
         ejecución.getListaImageViewComp().add(label);
-        pane1.getChildren().addAll(label,circle,circle1);
+        pane1.getChildren().addAll(label,circle,circle1,label2,label3);
     }
     /**
      * Método que detecta si se seleccionó un interruptor en la paleta y procede a dibujarlo en el canvas.
