@@ -320,46 +320,4 @@ public class Ejecutar {
     public void setTablaVerdad(Lista<Lista> tablaVerdad) {
         this.tablaVerdad = tablaVerdad;
     }
-    public void setNumeroEntradas(int numeroEntradas) {
-        this.numeroEntradas = numeroEntradas;
-    }
-    public void setNumeroSalidas(int numeroSalidas) {
-        this.numeroSalidas = numeroSalidas;
-    }
-
-    public static void main(String[] args) {
-        Ejecutar e = new Ejecutar();
-        e.añadirInterruptor();// seguir pruebas
-        e.añadirInterruptor();
-        Interruptor k = (Interruptor) e.listaInterruptores.buscar(1).getDato();
-        k.cambiarEstado();
-        e.añadirCompuerta(new Compuerta_AND(2));
-        e.añadirCompuerta(new Compuerta_AND(2));
-        e.añadirCompuerta(new Compuerta_AND(2));
-        e.conectarInterrup(0,0);
-        e.conectarInterrup(0,0);
-        e.conexiones(0,1);
-        e.conectarInterrup(1,1);
-        e.conexiones(1,2);
-        e.conectarInterrup(1,2);
-        e.probar();
-        Compuertas r = (Compuertas)e.listaCompuertas.buscar(2).getDato();
-        r.mostrar();
-        Interruptor j = (Interruptor) e.listaInterruptores.buscar(0).getDato();
-        j.cambiarEstado();
-        r.mostrar();
-        j.cambiarEstado();
-        r.mostrar();
-        /*e.añadirCompuerta(new Compuerta_AND(2));
-        e.añadirCompuerta(new Compuerta_AND(2));
-        e.conexiones(0,1);
-        e.conexiones(0,1);
-        e.añadirInterruptor();
-        e.conectarInterrup(0,0);
-        e.conectarInterrup(0,0);*/
-        //e.probar();
-        //Compuertas r = (Compuertas)e.listaCompuertas.buscar(1).getDato();
-
-
-    }
 }

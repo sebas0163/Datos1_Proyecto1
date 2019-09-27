@@ -222,7 +222,6 @@ public class controller2 {
             }
         }
     };
-
     /**
      * Método que permite seleccionar el numero de entradas de la compuerta a elegir.
      */
@@ -242,7 +241,6 @@ public class controller2 {
             stage.close();
         }
     }
-
     /**
      * Método encargado de dibujar la compuerta solicitada con su respectivo número de entradas
      * @param num dato de tipo entero que referencia al número de entradas solicitadas.

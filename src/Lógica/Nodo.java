@@ -10,6 +10,10 @@ public class Nodo<T> {
     private T dato;
     private Nodo<T> next;
 
+    /**
+     * Método constructor de la clase
+     * @param dato tipo de dato que alamcenará el nodo.
+     */
     public Nodo(T dato) {
         this.dato = dato;
         this.next = null;

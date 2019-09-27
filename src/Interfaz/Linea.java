@@ -55,10 +55,7 @@ public class Linea {
         pane1.getChildren().add(line);
 
     }
-    /**
-     *  Posiciona la compuerta a la que se le tomara su salida.
-     * @param A entrada de tipo entero que representa la posición de la compuerta a la que se le toma´ra su entrada.
-     */
+   //setters y getters
     public void setCompA(int A){
         this.compA = A;
     }

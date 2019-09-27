@@ -76,8 +76,12 @@ public abstract class Compuertas {
             System.out.println("entradas completas");
         }else{
             entradas.add(entrada);
-            Label label = (Label) listaEtiquetas.buscar(entradas.getLargo()-1).getDato();
-            label.setText("i<"+entrada+">");
+            try {
+                Label label = (Label) listaEtiquetas.buscar(entradas.getLargo() - 1).getDato();
+                label.setText("i<" + entrada + ">");
+            }catch (Exception e){
+                System.out.println("No hay Etiquetas");
+            }
             indice ++;
             if(indice == numeroEntradas){ operar();}
         }
@@ -108,9 +112,6 @@ public abstract class Compuertas {
      * Método encargado de calcular la salida de una compuerta.
      */
     public abstract void operar();
-    public void mostrar(){
-        System.out.println(salidas.buscar(0).getDato());
-    }
 
     /**
      * Método que retorna una de las salidas de la compuerta
@@ -121,7 +122,7 @@ public abstract class Compuertas {
         boolean salida = (boolean)salidas.buscar(pos).getDato();
         return salida;
     }
-
+    // Setters y getters
     public Lista<Boolean> getEntradas() {
         return entradas;
     }
@@ -176,9 +177,5 @@ public abstract class Compuertas {
 
     public Lista getListaEtiquetas() {
         return listaEtiquetas;
-    }
-
-    public void setListaEtiquetas(Lista listaEtiquetas) {
-        this.listaEtiquetas = listaEtiquetas;
     }
 }

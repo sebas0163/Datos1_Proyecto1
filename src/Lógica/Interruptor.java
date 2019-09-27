@@ -76,18 +76,10 @@ public class Interruptor {
             notificar();
         }
     }
-    /**
-     * Método que da a conocer el estado del interruptor
-     * @return booleano.
-     */
+    //Setters y getters
     public boolean isEstado() {
         return estado;
     }
-
-    /**
-     * Método que devuelve la lista con las imágenes del interruptor.
-     * @return atributo imágenes.
-     */
     public Lista<Image> getImage(){
         return imagenes;
     }

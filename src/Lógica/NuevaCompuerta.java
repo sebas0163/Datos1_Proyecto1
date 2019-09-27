@@ -56,6 +56,9 @@ public class NuevaCompuerta extends Compuertas {
                     break;
                 }
             }
+            for (int i = 0; i <= numeroSalidas;i++){
+                System.out.println("Salida"+(i+1)+": "+ salidas.buscar(i).getDato());
+            }
         }else{
             System.out.println("no se puede");
         }
@@ -78,4 +81,5 @@ public class NuevaCompuerta extends Compuertas {
     public void setCirculosDisponibles(int CirculosDisponibles){
         return;
     }
+
 }

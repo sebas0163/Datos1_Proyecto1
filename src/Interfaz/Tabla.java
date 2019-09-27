@@ -68,7 +68,6 @@ public class Tabla {
         ejecutar.setTablaVerdad(calculoVerdad);
         añadirTabla();
     }
-
     /**
      * Método encargado de añadir la matriz que contiene el calculo de la tabla a la tabla de interfaz.
      */
@@ -84,7 +83,6 @@ public class Tabla {
         }
         tabla.setItems(tablaVerdad);
     }
-
     /**
      * Método que añade valores true a la lista de valores, según la cantidad de entradas de la compuerta
      */
@@ -93,7 +91,6 @@ public class Tabla {
             listaValores.add(true);
         }
     }
-
     /**
      * Método que va cambiando los elemntos de la lista de valores cada tanto de iteraciones, según la tabla de verdad.
      * @param indice
@@ -120,7 +117,6 @@ public class Tabla {
              }
          }
      }
-
     /**
      * Método que permite operar el circuito de nuevo sin tomar en cuenta los interruptores.
      */
@@ -132,7 +128,6 @@ public class Tabla {
             temp = temp.getNext();
         }
      }
-
     /**
      * Método que añade columnas a la tabla según la cantidad de ntradas y salidas.
      */
@@ -152,7 +147,6 @@ public class Tabla {
             indice ++;
         }
     }
-
     /**
      * Método que toma las compuertas que poseen las entradas del nuevo circuito
      */

@@ -184,15 +184,19 @@ public class Controller {
         }
     };
     EventHandler<MouseEvent> clickNuevaCompuerta = new EventHandler<MouseEvent>() {
+        /**
+         * Método encargado de crear una nueva instancia de la nueva compuerta y todos los elementos dependientes de esta.
+         * @param event instancia derivada de la clase Mouse Event.
+         */
         @Override
         public void handle(MouseEvent event) {
             ejecución.añadirCompuerta((NuevaCompuerta)ejecución.getCompuertasNuevas().buscar(0).getDato());
-            Compuertas comp = (Compuertas) ejecución.getlista().buscar(ejecución.getNuemeroCompuertas()-1).getDato();
+            NuevaCompuerta comp = (NuevaCompuerta) ejecución.getlista().buscar(ejecución.getNuemeroCompuertas()-1).getDato();
             Image im = (Image)comp.getImagenes().buscar(0).getDato();
-            Circle circle = new Circle(0,45,5);
-            Circle circle1 = new Circle(160,45,5);
-            comp.getCirculos().add(circle1);
+            Circle circle = new Circle(160,45,5);
+            Circle circle1 = new Circle(0,45,5);
             comp.getCirculos().add(circle);
+            comp.getCirculos().add(circle1);
             Label label = new Label();
             label.setGraphic(new ImageView(im));
             label.setOnMousePressed(LabelOnMousePressedEventHandler);
@@ -209,9 +213,9 @@ public class Controller {
          */
         @Override
         public void handle(MouseEvent t) {
-            if(t.getButton().equals(MouseButton.SECONDARY)){
+            if (t.getButton().equals(MouseButton.SECONDARY)) {
                 return;
-            }else {
+            } else {
                 double offsetX = t.getSceneX() - orgSceneX;
                 double offsetY = t.getSceneY() - orgSceneY;
                 double newTranslateX = orgTranslateX + offsetX;
@@ -222,31 +226,31 @@ public class Controller {
                 Compuertas comp = (Compuertas) ejecución.getlista().buscar(numComp).getDato();
                 Nodo temp = comp.getCirculos().getHead();
                 int indice = 0;
-                while (temp != null){
+                while (temp != null) {
                     Circle circle = (Circle) temp.getDato();
-                    if (indice == 0){
+                    if (indice == 0) {
                         circle.setCenterX(newTranslateX + 160);
-                        circle.setCenterY(newTranslateY +45);
-                    }else{
+                        circle.setCenterY(newTranslateY + 45);
+                    } else {
                         circle.setCenterX(newTranslateX);
-                        circle.setCenterY(newTranslateY+45);
+                        circle.setCenterY(newTranslateY + 45);
                     }
                     temp = temp.getNext();
-                    indice ++;
+                    indice++;
                 }
                 indice = 0;
                 Nodo temp2 = comp.getListaEtiquetas().getHead();
-                while (temp2 != null){
+                while (temp2 != null) {
                     Label label = (Label) temp2.getDato();
-                    if (indice == 0){
-                        label.setLayoutY(newTranslateY+32);
-                        label.setLayoutX(newTranslateX+4);
-                    }else{
-                        label.setLayoutX(newTranslateX+126);
-                        label.setLayoutY(newTranslateY+32);
+                    if (indice == 0) {
+                        label.setLayoutY(newTranslateY + 32);
+                        label.setLayoutX(newTranslateX + 4);
+                    } else {
+                        label.setLayoutX(newTranslateX + 126);
+                        label.setLayoutY(newTranslateY + 32);
                     }
                     temp2 = temp2.getNext();
-                    indice ++;
+                    indice++;
                 }
                 comp.setPosX(newTranslateX);
                 comp.setPosY(newTranslateY);
@@ -273,6 +277,10 @@ public class Controller {
             System.out.println(e);
         }
     }
+
+    /**
+     * Método encargado de modular el circuito.
+     */
     @FXML
     private void guardar(){
         try {
@@ -282,8 +290,8 @@ public class Controller {
             Image im = new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\nueva.png");
             ImageView view = new ImageView(im);
             view.setOnMouseClicked(clickNuevaCompuerta);
-            view.setFitHeight(65);
-            view.setFitWidth(110);
+            view.setFitHeight(67);
+            view.setFitWidth(137);
             vBox.getChildren().add(view);
 
         }catch (Exception e){
@@ -291,6 +299,9 @@ public class Controller {
         }
     }
 
+    /**
+     * Método encargado de probar y establecer todas las conexiones del circuito.
+     */
     @FXML
     private void probar(){
         try {
@@ -309,8 +320,6 @@ public class Controller {
                 temp2 = temp2.getNext();
             }
             ejecución.probar();
-            Compuertas comp = (Compuertas) ejecución.getlista().buscar(ejecución.getlista().getLargo() - 1).getDato();
-            comp.mostrar();
         }catch (Exception e){
             System.out.println("Alguna compuerta no se encuetra con todas las entradas definidas");
         }

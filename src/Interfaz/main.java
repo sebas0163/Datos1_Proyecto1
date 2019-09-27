@@ -1,12 +1,16 @@
 package Interfaz;
 
-import Lógica.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Cláse encargada de ejecutar el programa
+ * @author Sebastián Moya
+ * @date 31/08/19
+ */
 public class main extends Application {
 
     @Override
