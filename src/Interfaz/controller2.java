@@ -19,7 +19,6 @@ import static Interfaz.Controller.*;
 /**
  * Clase encargada de controlar los eventos de la ventana emergente
  * @author Sebastián Moya
- * @date 10/09/19
  */
 public class controller2 {
     @FXML
@@ -251,7 +250,7 @@ public class controller2 {
         switch (compuerta) {
             case 1:
                 if (num == 2) {
-                    ejecutar.añadirCompuerta(new Compuerta_AND(2));
+                    ejecutar.annadirCompuerta(new Compuerta_AND(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
                     Label label = new Label();
@@ -284,7 +283,7 @@ public class controller2 {
                     ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().addAll(label,circle,circle1,circle2,label2);
                 } else if (num == 3) {
-                    ejecutar.añadirCompuerta(new Compuerta_AND(3));
+                    ejecutar.annadirCompuerta(new Compuerta_AND(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
                     int posX = 16;
@@ -319,7 +318,7 @@ public class controller2 {
                     ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,label2);
                 } else {
-                    ejecutar.añadirCompuerta(new Compuerta_AND(4));
+                    ejecutar.annadirCompuerta(new Compuerta_AND(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
                     int posX = 16;
@@ -359,7 +358,7 @@ public class controller2 {
                 break;
             case 2:
                 if (num == 2) {
-                    ejecutar.añadirCompuerta(new Compuerta_OR(2));
+                    ejecutar.annadirCompuerta(new Compuerta_OR(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
                     int posX = 10;
@@ -392,7 +391,7 @@ public class controller2 {
                     ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().addAll(label,circle,circle1,circle2,label2);
                 } else if (num == 3) {
-                    ejecutar.añadirCompuerta(new Compuerta_OR(3));
+                    ejecutar.annadirCompuerta(new Compuerta_OR(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
                     int posX = 10;
@@ -427,7 +426,7 @@ public class controller2 {
                     ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,label2);
                 } else {
-                    ejecutar.añadirCompuerta(new Compuerta_OR(4));
+                    ejecutar.annadirCompuerta(new Compuerta_OR(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
                     int posX = 10;
@@ -467,7 +466,7 @@ public class controller2 {
                 break;
             case 3:
                 if (num == 2) {
-                    ejecutar.añadirCompuerta(new Compuerta_NAND(2));
+                    ejecutar.annadirCompuerta(new Compuerta_NAND(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
                     int posX = 14;
@@ -500,7 +499,7 @@ public class controller2 {
                     ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().addAll(label,circle,circle1,circle2,label2);
                 } else if (num == 3) {
-                    ejecutar.añadirCompuerta(new Compuerta_NAND(3));
+                    ejecutar.annadirCompuerta(new Compuerta_NAND(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
                     int posX = 14;
@@ -535,7 +534,7 @@ public class controller2 {
                     ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,label2);
                 } else {
-                    ejecutar.añadirCompuerta(new Compuerta_NAND(4));
+                    ejecutar.annadirCompuerta(new Compuerta_NAND(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
                     int posX = 14;
@@ -575,7 +574,7 @@ public class controller2 {
                 break;
             case 4:
                 if (num == 2) {
-                    ejecutar.añadirCompuerta(new Compuerta_NOR(2));
+                    ejecutar.annadirCompuerta(new Compuerta_NOR(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
                     int posX = 14;
@@ -608,7 +607,7 @@ public class controller2 {
                     ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().addAll(label,circle,circle1,circle2,label2);
                 } else if (num == 3) {
-                    ejecutar.añadirCompuerta(new Compuerta_NOR(3));
+                    ejecutar.annadirCompuerta(new Compuerta_NOR(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
                     int posX = 14;
@@ -643,7 +642,7 @@ public class controller2 {
                     ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,label2);
                 } else {
-                    ejecutar.añadirCompuerta(new Compuerta_NOR(4));
+                    ejecutar.annadirCompuerta(new Compuerta_NOR(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
                     int posX = 14;
@@ -683,7 +682,7 @@ public class controller2 {
                 break;
             case 5:
                 if (num == 2) {
-                    ejecutar.añadirCompuerta(new Compuerta_XOR(2));
+                    ejecutar.annadirCompuerta(new Compuerta_XOR(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
                     int posX = 5;
@@ -716,7 +715,7 @@ public class controller2 {
                     ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().addAll(label,circle,circle1,circle2,label2);
                 } else if (num == 3) {
-                    ejecutar.añadirCompuerta(new Compuerta_XOR(3));
+                    ejecutar.annadirCompuerta(new Compuerta_XOR(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
                     int posX = 5;
@@ -751,7 +750,7 @@ public class controller2 {
                     ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,label2);
                 } else {
-                    ejecutar.añadirCompuerta(new Compuerta_XOR(4));
+                    ejecutar.annadirCompuerta(new Compuerta_XOR(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
                     int posX = 5;
@@ -791,7 +790,7 @@ public class controller2 {
                 break;
             case 6:
                 if (num == 2) {
-                    ejecutar.añadirCompuerta(new Compuerta_NXOR(2));
+                    ejecutar.annadirCompuerta(new Compuerta_NXOR(2));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(0).getDato();
                     int posX = 5;
@@ -824,7 +823,7 @@ public class controller2 {
                     ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().addAll(label,circle,circle1,circle2,label2);
                 } else if (num == 3) {
-                    ejecutar.añadirCompuerta(new Compuerta_NXOR(3));
+                    ejecutar.annadirCompuerta(new Compuerta_NXOR(3));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(1).getDato();
                     int posX = 5;
@@ -859,7 +858,7 @@ public class controller2 {
                     ejecutar.getListaImageViewComp().add(label);
                     pane1.getChildren().addAll(label,circle,circle1,circle2,circle3,label2);
                 } else {
-                    ejecutar.añadirCompuerta(new Compuerta_NXOR(4));
+                    ejecutar.annadirCompuerta(new Compuerta_NXOR(4));
                     comp = (Compuertas) ejecutar.getlista().buscar(ejecutar.getNuemeroCompuertas() - 1).getDato();
                     im = (Image) comp.getImagenes().buscar(2).getDato();
                     int posX = 5;
