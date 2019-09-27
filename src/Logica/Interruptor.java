@@ -1,4 +1,4 @@
-package Lógica;
+package Logica;
 
 import javafx.scene.image.Image;
 import javafx.scene.shape.Circle;
@@ -7,7 +7,6 @@ import javafx.scene.shape.Circle;
 /**
  * Clase encargada de dar un valor true o false a una entrada.
  * @author Sebastián Moya
- * @date 1/09/19
  */
 public class Interruptor {
     private Lista<Compuertas> observadores;
@@ -34,18 +33,10 @@ public class Interruptor {
         }
     }
 
-    /**
-     * Método encargado de establcer la entrada de la compuerta que está dependiente al interruptor.
-     * @param pos
-     */
     public void setEntradasDependientes(int pos){
         entradasDependientes.add(pos);
     }
 
-    /**
-     * Método encargado añadir un nuevo observador a la lista de observadores.
-     * @param comp nuevo observador.
-     */
     public void agregarObservador(Compuertas comp){
         observadores.add(comp);
     }

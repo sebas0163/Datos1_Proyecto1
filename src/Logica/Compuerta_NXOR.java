@@ -1,4 +1,4 @@
-package Lógica;
+package Logica;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -6,12 +6,12 @@ import javafx.scene.image.Image;
 /**
  * Clase encargada del funcionamiento de la compuerta lógica NXOR.
  * @author Sebastián Moya.
- * @date 01/09/19
  */
 public class Compuerta_NXOR extends Compuertas {
     private int numeroSalidas;
     /**
      * Método constructor
+     * @param cantidadEntradas numero de entradas que tendra la compuerta
      */
     public Compuerta_NXOR(int cantidadEntradas){
         this.numeroEntradas = cantidadEntradas;

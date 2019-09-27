@@ -1,6 +1,6 @@
 package Interfaz;
 
-import Lógica.*;
+import Logica.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -43,7 +43,7 @@ public class controller2 {
         seleccion1.setToggleGroup(group);
         seleccion2.setToggleGroup(group);
         seleccion3.setToggleGroup(group);
-        ejecutar = ejecución;
+        ejecutar = ejecucion;
     }
     EventHandler<MouseEvent> LabelOnMousePressedEventHandler = new EventHandler<MouseEvent>() {
         /**
@@ -79,15 +79,15 @@ public class controller2 {
             if (t.getButton().equals(MouseButton.SECONDARY) & !(t.isAltDown())) {
                 int numComp = ejecutar.getListaImageViewComp().getPos(t.getSource());
                 Compuertas compuerta = (Compuertas) ejecutar.getlista().buscar(numComp).getDato();
-                Linea temp = (Linea) ejecución.getLineasComp().buscar(ejecución.getLineasComp().getLargo() - 1).getDato();
-                Lista listaCompuertas = ejecución.getlista();
+                Linea temp = (Linea) ejecucion.getLineasComp().buscar(ejecucion.getLineasComp().getLargo() - 1).getDato();
+                Lista listaCompuertas = ejecucion.getlista();
                 Nodo aux = listaCompuertas.getHead();
                 while (aux != null){
                     Compuertas comp = (Compuertas) aux.getDato();
                     double X = compuerta.getPosX();
                     double Y = compuerta.getPosY();
                     if ((t.getX()+X >= comp.getPosX() & t.getX()+X <= comp.getPosX()+167)& t.getY()+Y >= comp.getPosY() & t.getY()+Y <= comp.getPosY()+92){
-                        temp.setCompB(ejecución.getlista().getPos(comp));
+                        temp.setCompB(ejecucion.getlista().getPos(comp));
                         temp.dibujar();
                         break;
                     }else{

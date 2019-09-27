@@ -1,10 +1,9 @@
-package Lógica;
+package Logica;
 
 /**
  * Clase encargarda de alamcenar los datos asignados y asociarlos o apuntarlos otro obejto de la misma clase.
  * @author sebas
  * @param <T> parámetro que representa el tipo de dato que se va a almacenar.
- * @date 31/08/19
  */
 public class Nodo<T> {
     private T dato;

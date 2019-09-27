@@ -1,19 +1,18 @@
 package Interfaz;
 
-import Lógica.Compuertas;
-import Lógica.Interruptor;
+import Logica.Compuertas;
+import Logica.Interruptor;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
 
-import static Interfaz.Controller.ejecución;
+import static Interfaz.Controller.ejecucion;
 import static Interfaz.Controller.pane1;
 
 /**
  * Clase encargada de crear las lineas que se dibujan  en el canvas.
  * @author Sebastián Moya Monge
- * @date 11/09/19
  */
 public class Linea {
     private int compA;
@@ -24,8 +23,8 @@ public class Linea {
      */
     public void dibujarLineaInterruptor(){
         Line line = new Line();
-        Interruptor inter = (Interruptor) ejecución.getInter().buscar(compA).getDato();
-        Compuertas compuertas = (Compuertas) ejecución.getlista().buscar(compB).getDato();
+        Interruptor inter = (Interruptor) ejecucion.getInter().buscar(compA).getDato();
+        Compuertas compuertas = (Compuertas) ejecucion.getlista().buscar(compB).getDato();
         line.startYProperty().bind(inter.getCircle().centerYProperty());
         line.startXProperty().bind(inter.getCircle().centerXProperty());
         line.endXProperty().bind(((Circle)compuertas.getCirculos().buscar(compuertas.getCirculosDisponibles()).getDato()).centerXProperty());
@@ -42,8 +41,8 @@ public class Linea {
      */
     public void dibujar(){
         Line line = new Line();
-        Compuertas comp1 = (Compuertas) ejecución.getlista().buscar(compA).getDato();
-        Compuertas comp2 = (Compuertas) ejecución.getlista().buscar(compB).getDato();
+        Compuertas comp1 = (Compuertas) ejecucion.getlista().buscar(compA).getDato();
+        Compuertas comp2 = (Compuertas) ejecucion.getlista().buscar(compB).getDato();
         line.startXProperty().bind(((Circle)comp1.getCirculos().buscar(0).getDato()).centerXProperty());
         line.startYProperty().bind(((Circle)comp1.getCirculos().buscar(0).getDato()).centerYProperty());
         line.endXProperty().bind(((Circle)comp2.getCirculos().buscar(comp2.getCirculosDisponibles()).getDato()).centerXProperty());

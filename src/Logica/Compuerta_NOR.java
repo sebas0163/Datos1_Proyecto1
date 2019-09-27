@@ -1,4 +1,4 @@
-package Lógica;
+package Logica;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -6,13 +6,13 @@ import javafx.scene.image.Image;
 /**
  * Clase encargada del funcionamiento de la compuerta lógica NOR.
  * @author Sebastián Moya.
- * @date 01/09/19
  */
 public class Compuerta_NOR extends Compuertas {
     private int numeroSalidas;
 
     /**
      * Método constructor
+     * @param cantidadEntradas cantidad de entradas que tendra la compuerta
      */
     public Compuerta_NOR(int cantidadEntradas){
         this.numeroSalidas = 1;

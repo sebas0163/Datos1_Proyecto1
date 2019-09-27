@@ -1,6 +1,6 @@
 package Interfaz;
 
-import Lógica.*;
+import Logica.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +21,6 @@ import static Interfaz.controller2.compuerta;
 /**
  * Clase encargada de manejar las caraterísticas de la interfaz principal.
  * @author Sebastián Moya
- * @date 06/09/19
  */
 public class Controller {
     @FXML
@@ -29,7 +28,7 @@ public class Controller {
     @FXML
     private VBox vBox;
     public static Pane pane1;
-    public static Ejecutar ejecución = new Ejecutar();
+    public static Ejecutar ejecucion = new Ejecutar();
     private double orgSceneX;
     private double orgSceneY;
     private double orgTranslateX;
@@ -45,18 +44,18 @@ public class Controller {
         @Override
         public void handle(MouseEvent t) {
             if (t.getButton().equals(MouseButton.SECONDARY) & !(t.isAltDown())) {
-                int numInterruptor = ejecución.getListaImageViewInterr().getPos(t.getSource());
+                int numInterruptor = ejecucion.getListaImageViewInterr().getPos(t.getSource());
                 Linea linea = new Linea();
                 linea.setCompA(numInterruptor);
-                ejecución.insertarLinea(linea, 2);
+                ejecucion.insertarLinea(linea, 2);
             }else if(t.isAltDown() & t.getButton().equals(MouseButton.SECONDARY)) { //Con este evento se elimina la compuerta seleccionada y con ella todos los datos dependientes .
                 Label label = (Label) t.getSource(); //Se toma la compuerta seleccionada
-                ejecución.eliminarInterruptor(label);
+                ejecucion.eliminarInterruptor(label);
                 pane.getChildren().remove(label); //Se elimina la imagen de la interfaz
             }else if(t.isAltDown() & t.isPrimaryButtonDown()){//cambiar el estado del interruptor.
-                int numInterruptor = ejecución.getListaImageViewInterr().getPos(t.getSource());
-                Label label = (Label) ejecución.getListaImageViewInterr().buscar(numInterruptor).getDato();
-                Interruptor inter = (Interruptor) ejecución.getInter().buscar(numInterruptor).getDato();
+                int numInterruptor = ejecucion.getListaImageViewInterr().getPos(t.getSource());
+                Label label = (Label) ejecucion.getListaImageViewInterr().buscar(numInterruptor).getDato();
+                Interruptor inter = (Interruptor) ejecucion.getInter().buscar(numInterruptor).getDato();
                 if (inter.isEstado()){
                     Image im = (Image) inter.getImage().buscar(1).getDato();
                     label.setGraphic(new ImageView(im));
@@ -82,17 +81,17 @@ public class Controller {
         @Override
         public void handle(MouseEvent t) {
             if (t.getButton().equals(MouseButton.SECONDARY) & !(t.isAltDown())) {
-                int numInterruptor = ejecución.getListaImageViewInterr().getPos(t.getSource());
-                Interruptor interruptor = (Interruptor) ejecución.getInter().buscar(numInterruptor).getDato();
-                Linea temp = (Linea) ejecución.getLineasInterr().buscar(ejecución.getLineasInterr().getLargo() - 1).getDato();
-                Lista listaCompuertas = ejecución.getlista();
+                int numInterruptor = ejecucion.getListaImageViewInterr().getPos(t.getSource());
+                Interruptor interruptor = (Interruptor) ejecucion.getInter().buscar(numInterruptor).getDato();
+                Linea temp = (Linea) ejecucion.getLineasInterr().buscar(ejecucion.getLineasInterr().getLargo() - 1).getDato();
+                Lista listaCompuertas = ejecucion.getlista();
                 Nodo aux = listaCompuertas.getHead();
                 while (aux != null){
                     Compuertas comp = (Compuertas) aux.getDato();
                     double X = interruptor.getPosX();
                     double Y = interruptor.getPosY();
                     if ((t.getX()+X >= comp.getPosX() & t.getX()+X <= comp.getPosX()+167)& t.getY()+Y >= comp.getPosY() & t.getY()+Y <= comp.getPosY()+92){
-                        temp.setCompB(ejecución.getlista().getPos(comp));
+                        temp.setCompB(ejecucion.getlista().getPos(comp));
                         temp.dibujarLineaInterruptor();
                         break;
                     }else{
@@ -118,10 +117,10 @@ public class Controller {
                 double offsetY = t.getSceneY() - orgSceneY;
                 double newTranslateX = orgTranslateX + offsetX;
                 double newTranslateY = orgTranslateY + offsetY;
-                int numInter = ejecución.getListaImageViewInterr().getPos(t.getSource());
-                ((Label) ejecución.getListaImageViewInterr().buscar(numInter).getDato()).setTranslateX(newTranslateX);
-                ((Label) ejecución.getListaImageViewInterr().buscar(numInter).getDato()).setTranslateY(newTranslateY);
-                Interruptor interruptor= (Interruptor) ejecución.getInter().buscar(numInter).getDato();
+                int numInter = ejecucion.getListaImageViewInterr().getPos(t.getSource());
+                ((Label) ejecucion.getListaImageViewInterr().buscar(numInter).getDato()).setTranslateX(newTranslateX);
+                ((Label) ejecucion.getListaImageViewInterr().buscar(numInter).getDato()).setTranslateY(newTranslateY);
+                Interruptor interruptor= (Interruptor) ejecucion.getInter().buscar(numInter).getDato();
                 interruptor.getCircle().setCenterX(newTranslateX + 16);
                 interruptor.getCircle().setCenterY(newTranslateY+87);
                 interruptor.setPosX(newTranslateX);
@@ -137,13 +136,13 @@ public class Controller {
         @Override
         public void handle(MouseEvent t) {
             if(t.getButton().equals(MouseButton.SECONDARY) & !(t.isAltDown())) {
-                int numComp = ejecución.getListaImageViewComp().getPos(t.getSource());
+                int numComp = ejecucion.getListaImageViewComp().getPos(t.getSource());
                 Linea linea = new Linea();
                 linea.setCompA(numComp);
-                ejecución.insertarLinea(linea, 1);
+                ejecucion.insertarLinea(linea, 1);
             }else if(t.isAltDown() & t.getButton().equals(MouseButton.SECONDARY)){ //Con este evento se elimina la compuerta seleccionada y con ella todos los datos dependientes .
                 Label label = (Label) t.getSource(); //Se toma la compuerta sleccionada
-                ejecución.eliminarCompuerta(label);
+                ejecucion.eliminarCompuerta(label);
                 pane.getChildren().remove(label); //Se elimina la imagen de la interfaz
             }else{
             orgSceneX = t.getSceneX();
@@ -161,17 +160,17 @@ public class Controller {
         @Override
         public void handle(MouseEvent t) {
             if (t.getButton().equals(MouseButton.SECONDARY) & !(t.isAltDown())) {
-                int numComp = ejecución.getListaImageViewComp().getPos(t.getSource());
-                Compuertas compuerta = (Compuertas) ejecución.getlista().buscar(numComp).getDato();
-                Linea temp = (Linea) ejecución.getLineasComp().buscar(ejecución.getLineasComp().getLargo() - 1).getDato();
-                Lista listaCompuertas = ejecución.getlista();
+                int numComp = ejecucion.getListaImageViewComp().getPos(t.getSource());
+                Compuertas compuerta = (Compuertas) ejecucion.getlista().buscar(numComp).getDato();
+                Linea temp = (Linea) ejecucion.getLineasComp().buscar(ejecucion.getLineasComp().getLargo() - 1).getDato();
+                Lista listaCompuertas = ejecucion.getlista();
                 Nodo aux = listaCompuertas.getHead();
                 while (aux != null){
                     Compuertas comp = (Compuertas) aux.getDato();
                     double X = compuerta.getPosX();
                     double Y = compuerta.getPosY();
                     if ((t.getX()+X >= comp.getPosX() & t.getX()+X <= comp.getPosX()+167)& t.getY()+Y >= comp.getPosY() & t.getY()+Y <= comp.getPosY()+92){
-                        temp.setCompB(ejecución.getlista().getPos(comp));
+                        temp.setCompB(ejecucion.getlista().getPos(comp));
                         temp.dibujar();
                         break;
                     }else{
@@ -190,8 +189,8 @@ public class Controller {
          */
         @Override
         public void handle(MouseEvent event) {
-            ejecución.añadirCompuerta((NuevaCompuerta)ejecución.getCompuertasNuevas().buscar(0).getDato());
-            NuevaCompuerta comp = (NuevaCompuerta) ejecución.getlista().buscar(ejecución.getNuemeroCompuertas()-1).getDato();
+            ejecucion.annadirCompuerta((NuevaCompuerta)ejecucion.getCompuertasNuevas().buscar(0).getDato());
+            NuevaCompuerta comp = (NuevaCompuerta) ejecucion.getlista().buscar(ejecucion.getNuemeroCompuertas()-1).getDato();
             Image im = (Image)comp.getImagenes().buscar(0).getDato();
             Circle circle = new Circle(160,45,5);
             Circle circle1 = new Circle(0,45,5);
@@ -202,7 +201,7 @@ public class Controller {
             label.setOnMousePressed(LabelOnMousePressedEventHandler);
             label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
             label.setOnMouseReleased(LabelOnMouseReleased);
-            ejecución.getListaImageViewComp().add(label);
+            ejecucion.getListaImageViewComp().add(label);
             pane1.getChildren().addAll(label,circle,circle1);
         }
     };
@@ -222,8 +221,8 @@ public class Controller {
                 double newTranslateY = orgTranslateY + offsetY;
                 ((Label) (t.getSource())).setTranslateX(newTranslateX);
                 ((Label) (t.getSource())).setTranslateY(newTranslateY);
-                int numComp = ejecución.getListaImageViewComp().getPos(t.getSource());
-                Compuertas comp = (Compuertas) ejecución.getlista().buscar(numComp).getDato();
+                int numComp = ejecucion.getListaImageViewComp().getPos(t.getSource());
+                Compuertas comp = (Compuertas) ejecucion.getlista().buscar(numComp).getDato();
                 Nodo temp = comp.getCirculos().getHead();
                 int indice = 0;
                 while (temp != null) {
@@ -284,9 +283,9 @@ public class Controller {
     @FXML
     private void guardar(){
         try {
-            ejecución.añadirNuevaCompuerta(new NuevaCompuerta(ejecución.getTablaVerdad(),ejecución.getNumeroEntradas(),ejecución.getNumeroSalidas()));
+            ejecucion.annadirNuevaCompuerta(new NuevaCompuerta(ejecucion.getTablaVerdad(),ejecucion.getNumeroEntradas(),ejecucion.getNumeroSalidas()));
             pane.getChildren().clear();
-            ejecución.nuevaHoja();
+            ejecucion.nuevaHoja();
             Image im = new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\nueva.png");
             ImageView view = new ImageView(im);
             view.setOnMouseClicked(clickNuevaCompuerta);
@@ -305,21 +304,21 @@ public class Controller {
     @FXML
     private void probar(){
         try {
-            Lista lineasInterruptores = ejecución.getLineasInterr();
-            Lista lineasCompuertas = ejecución.getLineasComp();
+            Lista lineasInterruptores = ejecucion.getLineasInterr();
+            Lista lineasCompuertas = ejecucion.getLineasComp();
             Nodo temp1 = lineasInterruptores.getHead();
             Nodo temp2 = lineasCompuertas.getHead();
             while (temp1 != null) {
                 Linea linea = (Linea) temp1.getDato();
-                ejecución.conectarInterrup(linea.getCompA(), linea.getCompB());
+                ejecucion.conectarInterrup(linea.getCompA(), linea.getCompB());
                 temp1 = temp1.getNext();
             }
             while (temp2 != null) {
                 Linea linea = (Linea) temp2.getDato();
-                ejecución.conexiones(linea.getCompA(), linea.getCompB());
+                ejecucion.conexiones(linea.getCompA(), linea.getCompB());
                 temp2 = temp2.getNext();
             }
-            ejecución.probar();
+            ejecucion.probar();
         }catch (Exception e){
             System.out.println("Alguna compuerta no se encuetra con todas las entradas definidas");
         }
@@ -438,8 +437,8 @@ public class Controller {
      */
     @FXML
     private void pressNOT(MouseEvent event){
-        ejecución.añadirCompuerta(new Compuerta_NOT());
-        Compuertas comp = (Compuertas) ejecución.getlista().buscar(ejecución.getNuemeroCompuertas()-1).getDato();
+        ejecucion.annadirCompuerta(new Compuerta_NOT());
+        Compuertas comp = (Compuertas) ejecucion.getlista().buscar(ejecucion.getNuemeroCompuertas()-1).getDato();
         Image im = (Image)comp.getImagenes().buscar(0).getDato();
         Label label2 = new Label("i<null>");
         Label label3 = new Label("o<null>");
@@ -460,7 +459,7 @@ public class Controller {
         label.setOnMousePressed(LabelOnMousePressedEventHandler);
         label.setOnMouseDragged(LabelOnMouseDraggedEventHandler);
         label.setOnMouseReleased(LabelOnMouseReleased);
-        ejecución.getListaImageViewComp().add(label);
+        ejecucion.getListaImageViewComp().add(label);
         pane1.getChildren().addAll(label,circle,circle1,label2,label3);
     }
     /**
@@ -469,8 +468,8 @@ public class Controller {
      */
     @FXML
     private void pressinterruptor(MouseEvent event){
-        ejecución.añadirInterruptor();
-        Interruptor interr = (Interruptor)ejecución.getInter().buscar(ejecución.getInter().getLargo()-1).getDato();
+        ejecucion.annadirInterruptor();
+        Interruptor interr = (Interruptor)ejecucion.getInter().buscar(ejecucion.getInter().getLargo()-1).getDato();
         Image im = (Image) interr.getImage().buscar(1).getDato();
         Label label = new Label();
         Circle circle = new Circle(16,87,5);
@@ -479,7 +478,7 @@ public class Controller {
         label.setOnMousePressed(interruptorOnMousePressed);
         label.setOnMouseDragged(interruptorOnMouseDragged);
         label.setOnMouseReleased(interruptorOnMouseReleased);
-        ejecución.getListaImageViewInterr().add(label);
+        ejecucion.getListaImageViewInterr().add(label);
         pane1.getChildren().addAll(label,circle);
     }
 
@@ -488,7 +487,7 @@ public class Controller {
      */
     @FXML
     private void reset(){
-        ejecución = new Ejecutar();
+        ejecucion = new Ejecutar();
         pane.getChildren().clear();
 
     }

@@ -1,13 +1,13 @@
 package Interfaz;
 
-import Lógica.*;
+import Logica.*;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import static Interfaz.Controller.ejecución;
+import static Interfaz.Controller.ejecucion;
 
 public class Tabla {
     @FXML
@@ -24,7 +24,7 @@ public class Tabla {
      * Método que inicializa los atributos de la interfaz.
      */
     public void initialize() {
-        this.ejecutar = ejecución;
+        this.ejecutar = ejecucion;
         this.tablaVerdad = FXCollections.observableArrayList();
         this.listaValores = new Lista<>();
         this.listaColumnas = new Lista<>();
@@ -32,7 +32,7 @@ public class Tabla {
         this.calculoVerdad = new Lista<>();
         this.iteraciones = Math.pow(2, ejecutar.getNumeroEntradas());
         setValores();
-        añadirColumna();
+        annadirColumna();
         tomarCompuertas();
         calcularTabla();
     }
@@ -66,12 +66,12 @@ public class Tabla {
             tablaVerdad.add(fila);
         }
         ejecutar.setTablaVerdad(calculoVerdad);
-        añadirTabla();
+        annadirTabla();
     }
     /**
      * Método encargado de añadir la matriz que contiene el calculo de la tabla a la tabla de interfaz.
      */
-    private void añadirTabla(){
+    private void annadirTabla(){
         Nodo temp = listaColumnas.getHead();
         int a = 0;
         while (temp != null){
@@ -131,7 +131,7 @@ public class Tabla {
     /**
      * Método que añade columnas a la tabla según la cantidad de ntradas y salidas.
      */
-    private void añadirColumna(){
+    private void annadirColumna(){
         int indice = 0;
         while (indice != ejecutar.getNumeroEntradas()){
             TableColumn column = new TableColumn<Lista,Boolean>("entrada");

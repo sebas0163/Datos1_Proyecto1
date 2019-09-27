@@ -1,11 +1,10 @@
-package Lógica;
+package Logica;
 
 
 /**
  * Clase encargada de guardar un conjunto de nodos
  * @param <T> parámetro que define el tipo de dato que guardará la lista
  * @author sebastián Moya
- * @date 31/08/19
  */
 public class Lista<T> {
     private Nodo head;

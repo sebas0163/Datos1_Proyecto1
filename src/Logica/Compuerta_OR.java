@@ -1,27 +1,27 @@
-package Lógica;
+package Logica;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 
 /**
- * Clase encargada del funcionamiento de la compuerta lógica XOR.
+ * Clase encargada del funcionamiento de la compuerta lógica OR.
  * @author Sebastián Moya.
- * @date 01/09/19
  */
-public class Compuerta_XOR extends Compuertas {
+public class Compuerta_OR extends Compuertas {
     private int numeroSalidas;
 
     /**
      * Método constructor
+     * @param cantidadEntradas numero de entradas que tendra la compuerta
      */
-    public Compuerta_XOR(int cantidadEntradas){
-        this.numeroEntradas = cantidadEntradas;
+    public Compuerta_OR(int cantidadEntradas){
         this.numeroSalidas = 1;
-        this.indice = 0;
+        this.indice =0;
+        this.numeroEntradas =cantidadEntradas;
         try {
-            this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta XOr.png"));
-            this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta XOr2.png"));
-            this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta XOr3.png"));
+            this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta or.png"));
+            this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta or2.png"));
+            this.imagenes.add(new Image("file:C:\\Users\\sebas\\Desktop\\git\\Datos1_Proyecto1\\src\\Interfaz\\Imagenes\\Compuerta or3.png"));
         }catch (Exception e) {
             System.out.println("error al cargar imagenes");
         }
@@ -31,8 +31,8 @@ public class Compuerta_XOR extends Compuertas {
      */
     @Override
     public void operar() {
-        if (indice == numeroEntradas){
-            if (entradas.buscar(0).getDato().equals(true)^ entradas.buscar(1).getDato().equals(true)){
+        if(indice == numeroEntradas){
+            if (entradas.verificar(true)){
                 Label label = (Label) listaEtiquetas.buscar(listaEtiquetas.getLargo()-1).getDato();
                 label.setText("o<true>");
                 salidas.add(true);
@@ -42,7 +42,7 @@ public class Compuerta_XOR extends Compuertas {
                 salidas.add(false);
             }
         }else{
-            System.out.println("Faltan entradas por asignar");
+            System.out.println("faltan entradas por asignar");
         }
         notificar();
     }

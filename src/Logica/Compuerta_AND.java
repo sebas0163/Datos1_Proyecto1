@@ -1,4 +1,4 @@
-package Lógica;
+package Logica;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -6,13 +6,13 @@ import javafx.scene.image.Image;
 /**
  * Clase encargada del funcionamiento de la compuerta lógica AND.
  * @author Sebastián Moya.
- * @date 31/08/19
  */
 public class Compuerta_AND extends Compuertas{
     private int numeroSalidas;
 
     /**
      * Método constructor que define los valores de los.
+     * @param cantidadEntradas numero de entradas que tendra la compuerta.
      */
     public Compuerta_AND(int cantidadEntradas){
         this.numeroSalidas = 1;

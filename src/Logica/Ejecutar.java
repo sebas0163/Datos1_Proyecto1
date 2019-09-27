@@ -1,4 +1,4 @@
-package Lógica;
+package Logica;
 
 import Interfaz.Linea;
 import javafx.scene.control.Label;
@@ -10,7 +10,6 @@ import static Interfaz.Controller.pane1;
 /**
  * Clase encargada de manejar la logica de las compuertas que son agragadas al area de trabajo.
  * @author Sebastián Moya.
- * @date 02/09/19
  */
 public class Ejecutar {
     private Lista<Linea> lineasComp;
@@ -43,7 +42,7 @@ public class Ejecutar {
     /**
      * Método que añade a la lista de interruptores, los interruptores que se usan en el area de trabajo.
      */
-    public void añadirInterruptor() {
+    public void annadirInterruptor() {
         listaInterruptores.add(new Interruptor());
     }
 
@@ -52,7 +51,7 @@ public class Ejecutar {
      *
      * @param comp dato de tipo compuerta, es el que se va a añadir.
      */
-    public void añadirCompuerta(Compuertas comp) {
+    public void annadirCompuerta(Compuertas comp) {
         listaCompuertas.add(comp);
         numeroCompuertas++;
     }
@@ -62,7 +61,7 @@ public class Ejecutar {
      *
      * @param comp compuerta del tipo nueva compuerta.
      */
-    public void añadirNuevaCompuerta(NuevaCompuerta comp) {
+    public void annadirNuevaCompuerta(NuevaCompuerta comp) {
         compuertasNuevas.add(comp);
     }
 
@@ -144,7 +143,7 @@ public class Ejecutar {
 
     /**
      * Método que busca las compuertas que tienen las salidas sin asociar y tomas sus salidas.
-     *
+     * @param fila recibe la lista que posee los valores de una fila.
      * @return Lista con las salidas del nuevo circuto.
      */
     public Lista salidas(Lista fila) {
@@ -163,7 +162,7 @@ public class Ejecutar {
     }
     /**
      * Método encargado de añadir una linea a la lista de lineas.
-     *
+     * @param identificador  número que permite reconocer la linea.
      * @param l dato de tipo linea, que contiene a la linea dibujada.
      */
     public void insertarLinea(Linea l, int identificador) {
